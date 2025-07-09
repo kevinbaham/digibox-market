@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DigiBox Market</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    header .container {
+      padding-top: 30px; /* un peu plus d'espace */
+      padding-bottom: 30px;
+    }
+    .logo {
+      font-size: 3rem; /* plus gros titre */
+      font-weight: 700;
+    }
+    .container img[alt="DigiBox Market"] {
+      height: 70px !important; /* logo plus gros */
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <a href="index.html">
+        <img src="img/logo.png" alt="DigiBox Market" style="height: 40px; vertical-align: middle;">
+      </a>
+      <h1 class="logo">DigiBox Market</h1>
+      <nav>
+        <ul>
+          <li><a href="#home">Accueil</a></li>
+          <li><a href="#products">Produits</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="login.html">Connexion</a></li>
+          <li><a href="#admin">Admin</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- PANIER EN HAUT AVEC LOGO -->
+  <div style="display: flex; align-items: center; justify-content: space-between; background: #f5f7fa; padding: 16px 32px;">
+    <div style="display: flex; align-items: center;">
+      <img src="img/panier.png" alt="DigiBox Market" style="height: 48px; margin-right: 16px;">
+      <span style="font-size: 2rem; font-weight: bold; color: #2563eb;">DigiBox Market</span>
+    </div>
+    <div id="panier-header" style="display: flex; align-items: center;">
+      <img src="img/panier.png" alt="Panier" style="height: 32px; margin-right: 8px;">
+      <span id="cart-count" style="font-size: 1.2rem;">0</span>
+    </div>
+  </div>
+
+  <!-- HOME -->
+  <section id="home" class="hero" data-aos="fade-up">
+    <div class="container">
+      <h2>Bienvenue sur DigiBox Market</h2>
+      <p>Votre boutique 100% digitale : ebooks, modèles, formations pratiques</p>
+      <a href="#products" class="btn">Voir les produits</a>
+    </div>
+  </section>
+
+  <!-- SECTION PRODUITS -->
+  <section id="products" class="products" data-aos="fade-up">
+    <div class="container">
+      <h2>Nos Produits</h2>
+      <div class="product-list" style="display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;">
+        <!-- Produit 1 : CV Canva – Bleu Pro -->
+        <div class="product-card" style="border:1px solid #eee; border-radius:10px; padding:20px; width:300px; text-align:center;">
+          <img src="img/cv-canva-1.png" alt="CV Canva – Bleu Pro" style="width:100%;max-width:220px;">
+          <h3>CV Canva – Bleu Pro</h3>
+          <p>Modèle 100% modifiable sur Canva</p>
+          <p><strong>Prix :</strong> 2000 FCFA</p>
+          <a href="https://www.canva.com/design/DAGstd4aCS4/D4WjsUaSJ0Ff14UgpnahcQ/edit?utm_content=DAGstd4aCS4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="btn" target="_blank" style="margin-bottom:8px;display:inline-block;">✏️ Modifier sur Canva</a><br>
+          <a href="https://www.canva.com/design/DAGstd4aCS4/sBGTTehP8yW8AuVNl8AuRw/view?utm_content=DAGstd4aCS4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=heececb0f22" target="_blank" style="font-size:0.95em;">👁️ Voir un aperçu</a>
+        </div>
+        <!-- Produit 2 : Modèle CV Pro -->
+        <div class="product-card" style="border:1px solid #eee; border-radius:10px; padding:20px; width:300px; text-align:center;">
+          <img src="img/cv-pro.png" alt="Modèle CV Pro" style="width:100%;max-width:220px;">
+          <h3>Modèle CV Pro</h3>
+          <p>Modèle de CV moderne, facile à éditer</p>
+          <p><strong>Prix :</strong> 2000 FCFA</p>
+          <a href="https://yourdomain.com/fichiers/cv-pro.zip" class="btn" target="_blank">📥 Télécharger</a>
+        </div>
+        <!-- Produit 3 : Pack Formation Canva -->
+        <div class="product-card" style="border:1px solid #eee; border-radius:10px; padding:20px; width:300px; text-align:center;">
+          <img src="img/formation-canva.png" alt="Pack Formation Canva" style="width:100%;max-width:220px;">
+          <h3>Pack Formation Canva</h3>
+          <p>Apprenez à maîtriser Canva facilement</p>
+          <p><strong>Prix :</strong> 5000 FCFA</p>
+          <a href="https://yourdomain.com/fichiers/canva-formation.zip" class="btn" target="_blank">📥 Télécharger</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq" data-aos="fade-up">
+    <div class="container">
+      <h2>FAQ</h2>
+      <div class="faq-item">
+        <h4>Comment acheter ?</h4>
+        <p>Faites le paiement Mobile Money, puis envoyez la preuve de paiement.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Comment recevoir mon fichier ?</h4>
+        <p>Après réception de la preuve de paiement, nous vous envoyons le fichier par email ou WhatsApp.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Moyens de paiement ?</h4>
+        <p>Mobile Money (Togo : +228 93 32 63 88) (Togo : +228 79 66 48 63), virement bancaire (UBA Togo, RIB disponible sur demande).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FORMULAIRE DE PAIEMENT -->
+  <section id="contact" class="contact" data-aos="fade-up">
+    <div class="container">
+      <h2>Contactez-nous</h2>
+      <form id="contact-form">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" required>
+
+        <label for="email">Email :</label>
+        <input type="email" id="email" required>
+
+        <label for="message">Message :</label>
+        <textarea id="message" rows="4"></textarea>
+
+        <button type="submit">Envoyer</button>
+      </form>
+      <p>Ou contactez-nous directement via <a href="https://wa.me/22879664863" target="_blank">WhatsApp</a></p>
+    </div>
+  </section>
+
+  <!-- ADMIN TABLEAU -->
+  <section id="admin" class="admin" data-aos="fade-up">
+    <div class="container">
+      <h2>Tableau de suivi des clients</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Produit</th>
+            <th>Preuve</th>
+            <th>Statut</th>
+          </tr>
+        </thead>
+        <tbody id="sheet-data">
+          <tr><td colspan="6">Chargement des données...</td></tr>
+        </tbody>
+        <!--
+        <tbody>
+          <tr>
+            <td>09/07/2025</td>
+            <td>Amina</td>
+            <td>amina@example.com</td>
+            <td>Modèle CV Pro</td>
+            <td><a href="#">Voir</a></td>
+            <td>Envoyé</td>
+          </tr>
+          <!-- Autres lignes ici -->
+        </tbody>
+        -->
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION PANIER ET PAIEMENT -->
+  <section id="panier" class="panier" data-aos="fade-up">
+    <div class="container">
+      <h2>Votre panier</h2>
+      <ul id="cart-list"></ul>
+      <p id="cart-empty">Votre panier est vide.</p>
+      <div id="instructions" style="display:none;">
+        <h3>Instructions de paiement</h3>
+        <ol>
+          <li>Effectuez le paiement via <b>Mobile Money</b> ou <b>virement bancaire</b>.</li>
+          <li>Envoyez la preuve de paiement ci-dessous.</li>
+          <li>Après confirmation, le téléchargement sera activé.</li>
+        </ol>
+        <button id="btn-preuve">Envoyer la preuve de paiement</button>
+        <input type="file" id="preuve-file" style="display:none;">
+        <p id="confirmation" style="color:green; display:none;">Preuve envoyée ! Téléchargement activé après validation.</p>
+        <a id="download-link" href="#" style="display:none;" download>📦 Télécharger votre produit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION NOTEZ CE SITE -->
+  <section id="note-site" class="note-site" data-aos="fade-up">
+    <div class="container" style="text-align:center;">
+      <h2>Notez ce site</h2>
+      <div id="stars" style="font-size:2rem; cursor:pointer;">
+        <span data-star="1">☆</span>
+        <span data-star="2">☆</span>
+        <span data-star="3">☆</span>
+        <span data-star="4">☆</span>
+        <span data-star="5">☆</span>
+      </div>
+      <div id="note-message" style="margin-top:10px;"></div>
+      <button id="confirm-note" style="margin-top:10px; display:none;">Confirmer ma note</button>
+      <div id="note-confirmed" style="margin-top:10px; color:green; display:none;"></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer data-aos="fade-up">
+    <div class="container">
+      <p>&copy; 2025 DigiBox Market - Tous droits réservés</p>
+      <a href="#">Politique de confidentialité</a>
+    </div>
+  </footer>
+
+  <script>
+    AOS.init();
+  </script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const sheetData = document.getElementById("sheet-data");
+
+  fetch("https://script.google.com/macros/s/AKfycbyivaMPTT1DAyFyJ4Hc6orfL0fcsGyRB7QcH639z3hek-03NcnEhcUnlJjI1FZslc23FA/exec")
+    .then(res => res.json())
+    .then(data => {
+      if (!Array.isArray(data) || data.length === 0) {
+        sheetData.innerHTML = "<tr><td colspan='6'>Aucune donnée</td></tr>";
+        return;
+      }
+
+      sheetData.innerHTML = data.map(row => `
+        <tr>
+          <td>${row["Date"] || ""}</td>
+          <td>${row["Nom"] || ""}</td>
+          <td>${row["Email"] || ""}</td>
+          <td>${row["Produit"] || ""}</td>
+          <td>${row["Lien Preuve"] ? `<a href="${row["Lien Preuve"]}" target="_blank">Voir</a>` : ""}</td>
+          <td>${row["Statut"] || ""}</td>
+        </tr>
+      `).join("");
+    })
+    .catch(() => {
+      sheetData.innerHTML = "<tr><td colspan='6'>Erreur lors du chargement</td></tr>";
+    });
+});
+</script>
+<script>
+// --- PANIER DEMO ---
+const products = [
+  { id: 1, name: "Modèle CV Pro", url: "cv-pro.pdf" },
+  { id: 2, name: "Lettre de motivation", url: "lettre-motivation.pdf" }
+];
+let cart = [];
+
+function renderCart() {
+  const cartList = document.getElementById('cart-list');
+  const cartEmpty = document.getElementById('cart-empty');
+  const instructions = document.getElementById('instructions');
+  cartList.innerHTML = '';
+  if (cart.length === 0) {
+    cartEmpty.style.display = '';
+    instructions.style.display = 'none';
+    return;
+  }
+  cartEmpty.style.display = 'none';
+  instructions.style.display = '';
+  cart.forEach(item => {
+    const li = document.createElement('li');
+    li.textContent = item.name + " ";
+    const btn = document.createElement('button');
+    btn.textContent = "Retirer";
+    btn.onclick = () => {
+      cart = cart.filter(p => p.id !== item.id);
+      renderCart();
+    };
+    li.appendChild(btn);
+    cartList.appendChild(li);
+  });
+}
+
+// Simule l'ajout au panier (à appeler sur bouton produit)
+function addToCart(productId) {
+  const prod = products.find(p => p.id === productId);
+  if (prod && !cart.some(p => p.id === prod.id)) {
+    cart.push(prod);
+    renderCart();
+  }
+}
+
+// Preuve de paiement
+document.getElementById('btn-preuve').onclick = () => {
+  document.getElementById('preuve-file').click();
+};
+document.getElementById('preuve-file').onchange = () => {
+  document.getElementById('confirmation').style.display = '';
+  // Simule l'activation du téléchargement après confirmation
+  setTimeout(() => {
+    const prod = cart[0];
+    if (prod) {
+      document.getElementById('download-link').href = prod.url;
+      document.getElementById('download-link').style.display = '';
+    }
+  }, 1500);
+};
+
+// --- NOTEZ CE SITE ---
+let selectedNote = 0;
+const stars = document.querySelectorAll('#stars span');
+const noteMsg = document.getElementById('note-message');
+const confirmBtn = document.getElementById('confirm-note');
+const noteConfirmed = document.getElementById('note-confirmed');
+
+stars.forEach(star => {
+  star.onclick = () => {
+    selectedNote = parseInt(star.dataset.star);
+    stars.forEach((s, i) => {
+      s.textContent = i < selectedNote ? "★" : "☆";
+    });
+    noteMsg.textContent = `Vous avez sélectionné ${selectedNote} étoile${selectedNote > 1 ? "s" : ""}.`;
+    confirmBtn.style.display = '';
+    noteConfirmed.style.display = 'none';
+  };
+});
+
+confirmBtn.onclick = () => {
+  noteConfirmed.textContent = `Merci pour votre note de ${selectedNote} étoile${selectedNote > 1 ? "s" : ""} !`;
+  noteConfirmed.style.display = '';
+  confirmBtn.style.display = 'none';
+  noteMsg.textContent = '';
+};
+</script>
+</body>
+</html>

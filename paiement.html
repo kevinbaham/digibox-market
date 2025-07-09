@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>DigiBox Market – Paiement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://checkout.cinetpay.com/v2/js/cinetpay.prod.min.js"></script>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    .product {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 10px;
+    }
+    .btn {
+      background: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛒 Boutique DigiBox</h1>
+
+  <div class="product">
+    <h3>Modèle CV Pro</h3>
+    <p>2000 FCFA</p>
+    <button class="btn" onclick="buyProduct('Modèle CV Pro', 2000)">Acheter</button>
+  </div>
+
+  <div class="product">
+    <h3>Pack Formation Canva</h3>
+    <p>5000 FCFA</p>
+    <button class="btn" onclick="buyProduct('Pack Formation Canva', 5000)">Acheter</button>
+  </div>
+
+  <script>
+    function buyProduct(productName, price) {
+      // Infos client fictif (en prod, demander email/téléphone)
+      const transaction_id = "TX" + Date.now(); // ID unique
+      const customer_email = "client@example.com";
+
+      CinetPay.setConfig({
+        apikey: "VOTRE_API_KEY", // 🔐 À personnaliser
+        site_id: "VOTRE_SITE_ID", // 🔐 À personnaliser
+        notify_url: "https://votre-site.com/notify", // webhook serveur
+        mode: "PRODUCTION"
+      });
+
+      CinetPay.getCheckout({
+        transaction_id: transaction_id,
+        amount: price,
+        currency: "XOF",
+        channels: "ALL",
+        description: "Achat: " + productName,
+        customer_email: customer_email,
+        metadata: {
+          product: productName
+        }
+      });
+
+      CinetPay.waitResponse(function(data) {
+        if (data.status === "ACCEPTED") {
+          alert("Paiement confirmé ✅");
+          // Redirige vers page de téléchargement sécurisée
+          window.location.href = "telechargement.html?produit=" + encodeURIComponent(productName);
+        } else {
+          alert("Paiement échoué ou annulé ❌");
+        }
+      });
+
+      CinetPay.onError(function(err) {
+        console.error(err);
+        alert("Erreur de paiement !");
+      });
+    }
+  </script>
+
+</body>
+</html>
