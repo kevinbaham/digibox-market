@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulaire CV - DigiBox</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      color: #2563eb;
+      margin-bottom: 40px;
+    }
+    form {
+      max-width: 650px;
+      margin: auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    button {
+      padding: 14px 20px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📝 Remplissez votre CV</h1>
+
+  <form id="cv-form">
+    <input type="text" name="nom" placeholder="Nom complet" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="tel" placeholder="Téléphone">
+    <textarea name="objectif" placeholder="Objectif professionnel"></textarea>
+    <textarea name="experience" placeholder="Expériences professionnelles"></textarea>
+    <textarea name="formation" placeholder="Formations (Diplômes, écoles…)"></textarea>
+    <textarea name="competences" placeholder="Compétences (HTML, CSS, etc.)"></textarea>
+    <textarea name="langues" placeholder="Langues (Français, Anglais...)"></textarea>
+    <textarea name="reseaux" placeholder="Réseaux sociaux (LinkedIn, GitHub...)"></textarea>
+    <button type="submit">Générer le CV</button>
+  </form>
+  <script>
+    document.getElementById("cv-form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+
+      localStorage.setItem("cv_data", JSON.stringify(data));
+
+      const modele = new URLSearchParams(window.location.search).get("modele");
+      if (!modele) {
+        alert("Aucun modèle sélectionné !");
+        return;
+      }
+
+      window.location.href = `cv/cv-modele${modele}.html`;
+    });
+  </script>
+</body>
+</html>

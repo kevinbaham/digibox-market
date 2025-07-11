@@ -1,1 +1,135 @@
-<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'><title>Accueil DigiBox</title></head><body><h1>Bienvenue sur DigiBox Market</h1></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .typewriter {
+      max-width: 800px;
+      margin: 30px auto;
+      color: rgb(236, 234, 234);
+      font-size: 1.1rem;
+      white-space: pre-line;
+      border-left: 4px solid #2e303394;
+      padding-left: 20px;
+      min-height: 160px;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: transparent; }
+      50% { border-color: #373a3f8f; }
+    }
+  </style>
+</head>
+<body style="background: url('img/background.jpg') no-repeat center center fixed; background-size: cover;">
+
+  <header>
+    <h1><img src="img/logo.png" alt="DigiBox Market" style="height:40px;" /> DigiBox Market</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="#produits">Produits</a>
+      <a href="login.html">Se connecter</a>
+      <a href="logout.html">Déconnexion</a>
+      <a href="profil.html">Profil</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Bienvenue sur DigiBox Market, votre boutique en ligne</h2>
+
+    <!-- Histoire en effet machine à écrire -->
+    <div class="typewriter" id="story"></div>
+  </section>
+
+  <section class="explore-cv" style="text-align:center; padding:40px;">
+    <h2>📚 Découvrez nos 100 modèles de CV</h2>
+    <p>Des CV modernes, prêts à personnaliser et télécharger.</p>
+    <a href="cv/index.html" class="btn-catalogue">Voir le catalogue des CV ➔</a>
+  </section>
+
+  <section class="products-container" id="produits">
+    <h2>Nos Produits</h2>
+    <div class="product-list">
+      <div class="product-card">
+        <img src="img/cv-canva-1.png" alt="CV Canva Bleu Pro" />
+        <h3>CV Canva Bleu Pro</h3>
+        <p>Modèle 100% modifiable sur Canva</p>
+        <p class="price">1000 FCFA</p>
+        <a href="paiement.html?produit=CV Canva Bleu Pro&prix=1000">Acheter</a>
+      </div>
+      <div class="product-card">
+        <img src="img/cv-pro.png" alt="Modèle CV Pro" />
+        <h3>Modèle CV Pro</h3>
+        <p>Modèle de CV moderne, facile à éditer</p>
+        <p class="price">1000 FCFA</p>
+        <a href="paiement.html?produit=Modèle CV Pro&prix=2000">Acheter</a>
+      </div>
+      <div class="product-card">
+        <img src="img/ebook.png" alt="Ebook SEO" />
+        <h3>Ebook SEO</h3>
+        <p>Apprenez le référencement facilement</p>
+        <p class="price">3000 FCFA</p>
+        <a href="paiement.html?produit=ebook-marketing&prix=3000">Acheter</a>
+      </div>
+      <div class="product-card">
+        <img src="img/formation.png" alt="Formation Canva" />
+        <h3>Formation Canva</h3>
+        <p>Maîtrisez Canva comme un pro</p>
+        <p class="price">5000 FCFA</p>
+        <a href="paiement.html?produit=formation-canva&prix=5000">Acheter</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
+    <img src="img/logo.png" alt="DigiBox Market" />
+    <p><a href="https://wa.me/22879664863" target="_blank">Contacter via WhatsApp</a></p>
+  </footer>
+
+  <!-- Boutons flottants -->
+  <a href="cv/index.html" class="floating-cv-btn">📚 CV</a>
+  <a href="#" class="floating-btn" onclick="openCart()">🛒 Commander</a>
+
+  <!-- Panier modal -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeCart()">&times;</span>
+      <h3>🛒 Votre panier</h3>
+      <ul class="cart-list" id="cartItems"></ul>
+      <p><strong>Total :</strong> <span id="cartTotal">0</span> FCFA</p>
+      <button class="pay-btn" onclick="payNow()">Payer maintenant</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const storyText = `
+Il était une fois un jeune créatif fatigué de chercher des CV, ebooks et formations de qualité.
+Un jour, il se dit : "Pourquoi ne pas créer un endroit simple, rapide et fiable ?"
+
+C’est ainsi que DigiBox Market est né. Un lieu pensé pour toi :
+📂 Des CV prêts à l’emploi
+📘 Des ebooks utiles
+🎓 Des formations pour progresser
+
+Tu es ici chez toi. Explore, télécharge, apprends, progresse.
+Le futur, c’est maintenant. Bienvenue dans la boîte !
+`;
+
+    let index = 0;
+    const speed = 30;
+    function typeWriter() {
+      if (index < storyText.length) {
+        document.getElementById("story").innerHTML += storyText.charAt(index);
+        index++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    window.onload = typeWriter;
+  </script>
+</body>
+</html>
