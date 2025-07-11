@@ -1,1 +1,108 @@
-<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'><title>CV 1</title></head><body><h1 id='nom'></h1></body></html>
+<!-- cv/cv-modele1.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>CV Modèle 1 – DigiBox</title>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 30px; }
+    .cv-container { max-width: 800px; margin: auto; background: white; padding: 30px; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius:8px; }
+    .header { display:flex; align-items:center; gap:20px; }
+    .header img { width:120px; height:120px; object-fit:cover; border-radius:50%; cursor:pointer; }
+    h1, h2 { color: #2563eb; margin:0; }
+    .section { margin:20px 0; }
+    .editable { min-height:20px; }
+    .btns { text-align:center; margin-top:30px; }
+    .btns button { margin: 0 10px; padding:12px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
+    .pdf-btn { background:#16a34a; color:white; }
+    .word-btn { background:#2563eb; color:white; }
+    .configure { display:none; text-align:center; margin-bottom:20px; }
+  </style>
+</head>
+<body>
+
+<div class="configure">
+  <p>💳 Paiement requis : 1000 FCFA pour débloquer le téléchargement</p>
+  <button onclick="payer()">Payer maintenant</button>
+</div>
+
+<div class="cv-container" id="cv">
+  <div class="header">
+    <img id="photo" src="assets/profile-placeholder.jpg" alt="Cliquez pour ajouter photo" onclick="document.getElementById('upload').click()">
+    <div>
+      <h1 contenteditable="true" class="editable" id="nom">Votre Nom Complet</h1>
+      <p contenteditable="true" class="editable" id="poste">Poste / Métier</p>
+      <p contenteditable="true" class="editable" id="contact">Email • Téléphone • Ville</p>
+    </div>
+  </div>
+
+  <input type="file" id="upload" accept="image/*" style="display:none" onchange="ajouterPhoto(event)">
+
+  <div class="section">
+    <h2>🎯 Objectif Professionnel</h2>
+    <div contenteditable="true" class="editable" id="objectif">Votre objectif de carrière...</div>
+  </div>
+  <div class="section">
+    <h2>💼 Expériences</h2>
+    <div contenteditable="true" class="editable" id="experience">Expérience 1<br>Expérience 2...</div>
+  </div>
+  <div class="section">
+    <h2>🎓 Formation</h2>
+    <div contenteditable="true" class="editable" id="formation">Ex : Licence, Master...</div>
+  </div>
+  <div class="section">
+    <h2>🛠 Compétences</h2>
+    <div contenteditable="true" class="editable" id="competences">HTML, CSS, JavaScript, ...</div>
+  </div>
+  <div class="section">
+    <h2>🌍 Langues</h2>
+    <div contenteditable="true" class="editable" id="langues">Français, Anglais...</div>
+  </div>
+  <div class="section">
+    <h2>🔗 Réseaux</h2>
+    <div contenteditable="true" class="editable" id="reseaux">LinkedIn • GitHub • Portfolio...</div>
+  </div>
+
+  <div class="btns">
+    <button class="pdf-btn" onclick="downloadPDF()">📄 Télécharger PDF</button>
+    <button class="word-btn" onclick="downloadDoc()">📝 Télécharger Word</button>
+  </div>
+</div>
+
+<script>
+  let paid = localStorage.getItem('digibox_paid') === 'true';
+  document.querySelector('.configure').style.display = paid ? 'none' : 'block';
+  document.querySelector('.btns').style.display = paid ? 'block' : 'none';
+
+  function payer() {
+    // ici tu appelles ta page paiement.html ou intègres paiement direct
+    // Après paiement réussi, exécute :
+    localStorage.setItem('digibox_paid', 'true');
+    location.reload();
+  }
+
+  function ajouterPhoto(e) {
+    const reader = new FileReader();
+    reader.onload = () => document.getElementById('photo').src = reader.result;
+    reader.readAsDataURL(e.target.files[0]);
+  }
+
+  function downloadPDF() {
+    if (!paid) return alert("Paiement requis.");
+    html2pdf().from(document.getElementById('cv')).save('CV.pdf');
+  }
+
+  function downloadDoc() {
+    if (!paid) return alert("Paiement requis.");
+    const blob = new Blob(
+      [document.getElementById('cv').outerHTML],
+      { type: "application/msword" }
+    );
+    saveAs(blob, 'CV.doc');
+  }
+</script>
+
+</body>
+</html>
