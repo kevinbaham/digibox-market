@@ -1,116 +1,123 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Fichier à télécharger</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Téléchargement - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .telechargement {
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 24px #0001;
+    }
+    .telechargement h2 {
+      margin-bottom: 20px;
+    }
+    .telechargement a.btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #3b82f6;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .telechargement a.btn:hover {
+      background: #2563eb;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 40px;
+      background-color: #f5f5f5;
+      box-shadow: 0 2px 10px #0001;
+    }
+    header img.logo {
+      height: 40px;
+    }
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f7f7f7;
+      margin-top: 60px;
+      font-size: 0.9rem;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-  <h2>🎉 Merci pour votre achat !</h2>
-
-  <!-- SECTION PRODUITS -->
-  <section id="products" class="products" data-aos="fade-up">
-    <div class="container">
-      <h2>Nos Produits</h2>
-      <div class="product-list" style="display: flex; gap: 32px; flex-wrap: wrap; justify-content: center;">
-        <!-- Produit 1 : CV Canva – Bleu Pro -->
-        <div class="product-card" style="border:1px solid #eee; border-radius:10px; padding:20px; width:300px; text-align:center;">
-          <img src="img/cv-canva-1.png" alt="CV Canva – Bleu Pro" style="width:100%;max-width:220px;">
-          <h3>CV Canva – Bleu Pro</h3>
-          <p>Modèle 100% modifiable sur Canva</p>
-          <p><strong>Prix :</strong> 2000 FCFA</p>
-          <a href="https://www.canva.com/design/DAGstd4aCS4/D4WjsUaSJ0Ff14UgpnahcQ/edit?utm_content=DAGstd4aCS4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" class="btn" target="_blank" style="margin-bottom:8px;display:inline-block;">✏️ Modifier sur Canva</a><br>
-          <a href="https://www.canva.com/design/DAGstd4aCS4/sBGTTehP8yW8AuVNl8AuRw/view?utm_content=DAGstd4aCS4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=heececb0f22" target="_blank" style="font-size:0.95em;">👁️ Voir un aperçu</a>
-        </div>
-        <!-- Ajoute d'autres produits ici -->
-        <div class="product-card" style="border:1px solid #eee; border-radius:10px; padding:20px; width:300px; text-align:center;">
-          <img src="img/cv-pro.png" alt="Modèle CV Pro" style="width:100%;max-width:220px;">
-          <h3>Modèle CV Pro</h3>
-          <p>Modèle de CV moderne, facile à éditer</p>
-          <p><strong>Prix :</strong> 2000 FCFA</p>
-          <a href="https://yourdomain.com/fichiers/cv-pro.zip" class="btn" target="_blank">📥 Télécharger</a>
-        </div>
-        <!-- Exemple d'un autre produit -->
-        <div class="product-card" style="border:1px solid #eee; border-radius:10px; padding:20px; width:300px; text-align:center;">
-          <img src="img/formation-canva.png" alt="Pack Formation Canva" style="width:100%;max-width:220px;">
-          <h3>Pack Formation Canva</h3>
-          <p>Apprenez à maîtriser Canva facilement</p>
-          <p><strong>Prix :</strong> 5000 FCFA</p>
-          <a href="https://yourdomain.com/fichiers/canva-formation.zip" class="btn" target="_blank">📥 Télécharger</a>
-        </div>
-      </div>
+  <header>
+    <div>
+      <img src="img/logo.png" alt="DigiBox Market" class="logo">
     </div>
-  </section>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="produits.html">Produits</a>
+      <a href="paiement.html">Paiement</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="telechargement">
+      <h2>✅ Merci pour votre achat !</h2>
+      <p>Votre téléchargement est prêt :</p>
+      <a id="download-link" href="#" class="btn" download>Télécharger maintenant</a>
+      <p style="margin-top: 20px;">
+        <a href="index.html">← Retour à l'accueil</a>
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
+  </footer>
 
   <script>
-    function buyProduct(productName, price) {
-      const transaction_id = "TX" + Date.now();
-      const customer_email = "client@example.com";
-
-      CinetPay.setConfig({
-        apikey: "VOTRE_API_KEY",
-        site_id: "VOTRE_SITE_ID",
-        notify_url: "https://votre-site.com/notify",
-        mode: "PRODUCTION"
-      });
-
-      CinetPay.getCheckout({
-        transaction_id: transaction_id,
-        amount: price,
-        currency: "XOF",
-        channels: "ALL",
-        description: "Achat: " + productName,
-        customer_email: customer_email,
-        metadata: {
-          product: productName
-        }
-      });
-
-      CinetPay.waitResponse(function(data) {
-        if (data.status === "ACCEPTED") {
-          const token = btoa(productName + ":" + transaction_id);
-          window.location.href = "telechargement.html?token=" + encodeURIComponent(token);
-        } else {
-          alert("Paiement échoué ou annulé ❌");
-        }
-      });
-
-      CinetPay.onError(function(err) {
-        console.error(err);
-        alert("Erreur de paiement !");
-      });
-    }
-
-    const params = new URLSearchParams(window.location.search);
-    const token = params.get("token");
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
 
     if (!token) {
-      document.write("<p>❌ Accès refusé. Token manquant.</p>");
+      alert("Accès non autorisé. Redirection vers l'accueil.");
+      window.location.href = "index.html";
     } else {
-      const decoded = atob(token); // décode "Produit:Transaction"
-      const [produit, transaction] = decoded.split(":");
+      try {
+        const decoded = atob(token).split(':');
+        const produit = decoded[0];
 
-      let lien = "#";
+        const liens = {
+          "CV Canva Bleu Pro": "telechargements/cv-canva.zip",
+          "Modèle CV Pro": "telechargements/cv-pro.zip",
+          "ebook-marketing": "telechargements/ebook-marketing.zip",
+          "modele-cv": "telechargements/modele-cv.zip",
+          "formation-canva": "telechargements/formation-canva.zip"
+        };
 
-      if (produit === "Modèle CV Pro") {
-        lien = "https://yourdomain.com/fichiers/cv-pro.zip";
-      } else if (produit === "Pack Formation Canva") {
-        lien = "https://yourdomain.com/fichiers/canva-formation.zip";
-      } else if (produit === "CV Canva – Bleu Pro") {
-        lien = "https://www.canva.com/design/DAGstd4aCS4/D4WjsUaSJ0Ff14UgpnahcQ/edit?utm_content=DAGstd4aCS4&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton";
-        var lienLecture = "https://www.canva.com/design/DAGstd4aCS4/sBGTTehP8yW8AuVNl8AuRw/view?utm_content=DAGstd4aCS4&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=heececb0f22";
-      }
-
-      if (produit === "CV Canva – Bleu Pro") {
-        document.write(`
-          <p>Vous avez acheté : <strong>${produit}</strong></p>
-          <a href="${lien}" class="btn" target="_blank">✏️ Modifier sur Canva</a><br>
-          <a href="${lienLecture}" target="_blank" style="display:inline-block;margin-top:10px;">👁️ Voir un aperçu</a>
-        `);
-      } else {
-        document.write(`
-          <p>Vous avez acheté : <strong>${produit}</strong></p>
-          <a href="${lien}" class="btn">📥 Télécharger ${produit}</a>
-        `);
+        const lien = liens[produit];
+        if (lien) {
+          document.getElementById("download-link").href = lien;
+        } else {
+          alert("Produit introuvable.");
+          window.location.href = "index.html";
+        }
+      } catch (e) {
+        alert("Jeton invalide.");
+        window.location.href = "index.html";
       }
     }
   </script>

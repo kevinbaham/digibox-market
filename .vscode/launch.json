@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Ouvrir avec Live Server",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://127.0.0.1:5500/index.html",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}
+// This file is used to configure the launch settings for debugging with Live Server in Visual Studio Code.

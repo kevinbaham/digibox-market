@@ -1,0 +1,91 @@
+/* Styles de base pour un CV pro */
+body {
+  font-family: 'Segoe UI', 'Roboto', sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  padding: 30px;
+}
+
+/* Container principal du CV */
+.cv-container {
+  max-width: 850px;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+/* Header du CV */
+.cv-header {
+  background: #2563eb;
+  color: white;
+  padding: 30px;
+  text-align: center;
+}
+.cv-header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+.cv-header p {
+  margin-top: 8px;
+}
+
+/* Contenu principal */
+.cv-content {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Colonne gauche (sidebar) */
+.cv-sidebar {
+  background: #e0e7ff;
+  flex: 1;
+  min-width: 220px;
+  padding: 20px;
+}
+.cv-sidebar h3 {
+  color: #2563eb;
+  margin-bottom: 10px;
+}
+.cv-sidebar p, .cv-sidebar li {
+  font-size: 0.95rem;
+}
+
+/* Colonne droite (main content) */
+.cv-main {
+  flex: 2;
+  padding: 20px;
+  min-width: 300px;
+}
+.cv-main h3 {
+  color: #2563eb;
+  margin-top: 20px;
+}
+.cv-main ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+/* Liens retour */
+.back-link {
+  display: inline-block;
+  margin: 30px auto;
+  background: #2563eb;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.back-link:hover {
+  background: #1e40af;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .cv-content {
+    flex-direction: column;
+  }
+}

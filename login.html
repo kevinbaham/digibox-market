@@ -2,172 +2,138 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Connexion - DigiBox Market</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://accounts.google.com/gsi/client" async defer></script>
   <style>
     body {
-      background: #fafbfc;
-      font-family: 'Inter', Arial, sans-serif;
+      background-color: #0f172a;
+      color: #f1f5f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    .container {
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 2px 16px #0001;
-      padding: 32px 28px 24px 28px;
-      margin: 80px auto 0 auto;
+
+    .login-container {
       max-width: 400px;
-      min-width: 300px;
-    }
-    h2 {
+      margin: 80px auto;
+      padding: 30px;
+      background-color: #1e293b;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
       text-align: center;
-      margin-bottom: 28px;
-      font-size: 1.7rem;
-      font-weight: 600;
     }
-    form label {
-      display: block;
-      margin-bottom: 6px;
-      margin-top: 16px;
-      font-weight: 500;
+
+    .login-container h2 {
+      margin-bottom: 20px;
     }
-    form input[type="email"],
-    form input[type="password"] {
+
+    .login-container input {
       width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      font-size: 1rem;
-      box-sizing: border-box;
-    }
-    form button[type="submit"] {
-      width: 100%;
-      padding: 10px;
-      background: #3b82f6;
-      color: #fff;
+      padding: 12px;
+      margin: 10px 0;
       border: none;
       border-radius: 6px;
-      font-size: 1.1rem;
-      font-weight: 600;
+      background-color: #334155;
+      color: white;
+    }
+
+    .login-container button {
+      width: 100%;
+      background-color: #3b82f6;
+      color: white;
+      padding: 12px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
-      margin-top: 10px;
-      transition: background 0.2s;
+      font-weight: bold;
     }
-    form button[type="submit"]:hover {
-      background: #2563eb;
+
+    .login-container button:hover {
+      background-color: #2563eb;
     }
-    hr {
-      margin: 28px 0 18px 0;
-      border: none;
-      border-top: 1px solid #eee;
-    }
-    .g_id_signin {
-      width: 100% !important;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 18px;
-    }
-    #welcome {
+
+    footer {
+      margin-top: 40px;
       text-align: center;
+      color: #94a3b8;
+    }
+
+    #googleLogin {
       margin-top: 20px;
-    }
-    #welcome button {
-      margin-top: 10px;
-      background: #e11d48;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 8px 18px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    a {
-      color: #3b82f6;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Connexion à DigiBox</h2>
 
-    <!-- Formulaire classique -->
-    <form id="login-form">
-      <label for="email">Email :</label>
-      <input type="email" id="email" required />
+  <header>
+    <h1><img src="img/logo.png" alt="DigiBox Market" style="height:40px;"/> DigiBox Market</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="produits.html">Produits</a>
+    </nav>
+  </header>
 
-      <label for="password">Mot de passe :</label>
-      <input type="password" id="password" required />
+  <main>
+    <div class="login-container">
+      <h2>Connexion</h2>
 
-      <button type="submit">Se connecter</button>
-    </form>
+      <form onsubmit="event.preventDefault(); connexionManuelle();">
+        <input type="email" id="email" placeholder="Adresse email" required />
+        <input type="password" id="password" placeholder="Mot de passe" required />
+        <button type="submit">Se connecter</button>
+      </form>
 
-    <hr />
-
-    <!-- Zone de connexion Google -->
-    <div id="g_id_onload"
-         data-client_id="912276718893-m2i1gg5jn5c0u8f0rhrm8gjgek92vb3a.apps.googleusercontent.com"
-         data-callback="handleCredentialResponse"
-         data-auto_prompt="false">
+      <!-- Bouton Google Sign-In -->
+      <div id="googleLogin"></div>
     </div>
-    <div class="g_id_signin" data-type="standard" data-theme="outline" data-size="large"></div>
+  </main>
 
-    <!-- Message de bienvenue -->
-    <div id="welcome" style="display: none;">
-      <p id="welcome-msg"></p>
-      <button onclick="logout()">Se déconnecter</button>
-    </div>
-
-    <p style="text-align:center; margin-top:18px;"><a href="index.html">← Retour à l’accueil</a></p>
-  </div>
+  <footer>
+    <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
+  </footer>
 
   <script>
-    function handleCredentialResponse(response) {
-      const jwt = response.credential;
-      const base64Url = jwt.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const userData = JSON.parse(atob(base64));
+    function connexionManuelle() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
 
-      // Affiche message + bouton de déconnexion
-      document.getElementById("welcome").style.display = "block";
-      document.querySelector(".g_id_signin").style.display = "none";
-      document.getElementById("welcome-msg").innerText =
-        `Bienvenue ${userData.name} (${userData.email})`;
-
-      // Sauvegarde temporaire dans le stockage local
-      localStorage.setItem("digibox_user", JSON.stringify(userData));
-
-      // Redirection après 2 secondes
-      setTimeout(() => {
-        window.location.href = "index.html"; // Redirige vers la page d'accueil
-      }, 2000);
+      if (email && password) {
+        localStorage.setItem('digibox_user', email);
+        window.location.href = 'produits.html';
+      } else {
+        alert("Veuillez remplir tous les champs.");
+      }
     }
 
-    function logout() {
-      localStorage.removeItem("digibox_user");
-      location.reload();
+    function handleGoogleCallback(response) {
+      const id_token = response.credential;
+      localStorage.setItem('digibox_google_login', id_token);
+      window.location.href = 'produits.html';
     }
 
-    // Si déjà connecté, affiche directement le message
-    const user = localStorage.getItem("digibox_user");
-    if (user) {
-      const data = JSON.parse(user);
-      document.getElementById("welcome").style.display = "block";
-      document.querySelector(".g_id_signin").style.display = "none";
-      document.getElementById("welcome-msg").innerText =
-        `Bienvenue ${data.name} (${data.email})`;
-    }
+    // Initialiser Google Sign-In après chargement
+    window.onload = () => {
+      if (window.google && google.accounts && google.accounts.id) {
+        google.accounts.id.initialize({
+          client_id: "912276718893-m2i1gg5jn5c0u8f0rhrm8gjgek92vb3a.apps.googleusercontent.com",
+          callback: handleGoogleCallback
+        });
 
-    // Gestion du formulaire classique (démo)
-    document.getElementById('login-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert('Connexion classique non encore implémentée.');
-    });
+        google.accounts.id.renderButton(
+          document.getElementById("googleLogin"),
+          {
+            theme: "outline",
+            size: "large",
+            shape: "pill",
+            text: "signin_with",
+            locale: "fr"
+          }
+        );
+      } else {
+        console.warn("Google Sign-In non chargé.");
+      }
+    };
   </script>
 </body>
 </html>

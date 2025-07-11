@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalogue CV Pro - DigiBox</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      color: #333;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .cv-box {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .cv-box:hover {
+      transform: scale(1.03);
+    }
+
+    .cv-box img {
+      width: 100%;
+      height: auto;
+    }
+
+    .cv-box h3 {
+      margin: 10px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #2563eb;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin: 12px 0;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #1e40af;
+    }
+
+    .pdf-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #2563eb;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      display: none;
+      z-index: 999;
+    }
+
+    .pdf-btn.show {
+      display: inline-block;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 20px;
+      text-align: center;
+      color: #2563eb;
+      text-decoration: underline;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>📚 Catalogue CV Professionnels</h1>
+
+  <div class="grid" id="catalogue">
+    <!-- Les CV seront générés ici -->
+  </div>
+
+  <!-- Bouton de téléchargement -->
+  <a href="#" class="pdf-btn" id="telechargerBtn" download>Télécharger CV</a>
+
+  <!-- Bouton de retour -->
+  <div style="text-align:center;">
+    <span class="back-link" onclick="window.location.reload()">← Retour au catalogue</span>
+  </div>
+
+  <script>
+    const catalogue = document.getElementById('catalogue');
+    const telechargerBtn = document.getElementById('telechargerBtn');
+
+    const cvList = [
+      {
+        titre: 'CV Développeur Web',
+        image: 'assets/cv-dev.jpg',
+        fichier: 'fichiers/cv-dev.pdf'
+      },
+      {
+        titre: 'CV Graphiste',
+        image: 'assets/cv-graphiste.jpg',
+        fichier: 'fichiers/cv-graphiste.pdf'
+      },
+      {
+        titre: 'CV Assistant RH',
+        image: 'assets/cv-rh.jpg',
+        fichier: 'fichiers/cv-rh.pdf'
+      }
+    ];
+
+    // Générer les CV dans la grille
+    cvList.forEach(cv => {
+      const box = document.createElement('div');
+      box.className = 'cv-box';
+      box.innerHTML = `
+        <img src="${cv.image}" alt="${cv.titre}">
+        <h3>${cv.titre}</h3>
+        <a href="#" class="btn" onclick="telechargerCV('${cv.fichier}')">Voir & Télécharger</a>
+      `;
+      catalogue.appendChild(box);
+    });
+
+    function telechargerCV(fichier) {
+      if (!localStorage.getItem('digibox_paid')) {
+        alert("Merci d’effectuer le paiement avant de télécharger le CV.");
+        window.location.href = 'paiement.html';
+        return;
+      }
+      // Déclencher le téléchargement
+      telechargerBtn.href = fichier;
+      telechargerBtn.classList.add('show');
+      telechargerBtn.click();
+    }
+  </script>
+
+</body>
+</html>

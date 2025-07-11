@@ -1,89 +1,138 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>DigiBox Market – Paiement</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://checkout.cinetpay.com/v2/js/cinetpay.prod.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paiement - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
   <style>
     body {
-      font-family: Arial;
-      padding: 20px;
+      font-family:'Segoe UI', sans-serif;
+      background:#f9fafb;
+      color:#333;
     }
-    .product {
-      border: 1px solid #ccc;
-      padding: 15px;
-      margin-bottom: 10px;
+    header, footer {
+      text-align:center;
+      padding:20px;
     }
-    .btn {
-      background: #007bff;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      cursor: pointer;
+    .sdk {
+      max-width:500px;
+      margin:60px auto;
+      text-align:center;
+      background:white;
+      padding:30px;
+      border-radius:12px;
+      box-shadow:0 4px 24px #0001;
     }
-    .btn:hover {
-      background: #0056b3;
+    .sdk button {
+      background:#16a34a;
+      color:white;
+      border:none;
+      padding:12px 24px;
+      border-radius:8px;
+      font-size:1rem;
+      cursor:pointer;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    .sdk button:hover {
+      background:#15803d;
+    }
+    .banner {
+      background:#2563eb;
+      color:white;
+      text-align:center;
+      padding:12px 20px;
+      border-radius:8px;
+      max-width:1000px;
+      margin:20px auto;
+    }
+    .banner a.cta {
+      background:white;
+      color:#2563eb;
+      padding:6px 14px;
+      border-radius:5px;
+      font-weight:bold;
+      text-decoration:none;
+      margin-left:10px;
+    }
+    .banner a.cta:hover {
+      background:#f9fafb;
     }
   </style>
 </head>
 <body>
 
-  <h1>🛒 Boutique DigiBox</h1>
+<header>
+  <img src="logo.png" alt="DigiBox Logo" style="height:50px;">
+  <h1>DigiBox Market</h1>
+</header>
 
-  <div class="product">
-    <h3>Modèle CV Pro</h3>
-    <p>2000 FCFA</p>
-    <button class="btn" onclick="buyProduct('Modèle CV Pro', 2000)">Acheter</button>
-  </div>
+<div class="banner">
+  🎉 Profitez de nos packs CV + Formations avec -20% !
+  <a href="paiement.html" class="cta">Commander maintenant</a>
+</div>
 
-  <div class="product">
-    <h3>Pack Formation Canva</h3>
-    <p>5000 FCFA</p>
-    <button class="btn" onclick="buyProduct('Pack Formation Canva', 5000)">Acheter</button>
-  </div>
+<main class="sdk">
+  <h2>Paiement sécurisé via CinetPay</h2>
+  <p>Choisissez votre moyen de paiement (Orange Money, Moov, Wave, cartes bancaires...)</p>
+  <button onclick="checkout()">💳 Payer maintenant</button>
+</main>
 
-  <script>
-    function buyProduct(productName, price) {
-      // Infos client fictif (en prod, demander email/téléphone)
-      const transaction_id = "TX" + Date.now(); // ID unique
-      const customer_email = "client@example.com";
+<footer>
+  <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
+</footer>
 
-      CinetPay.setConfig({
-        apikey: "VOTRE_API_KEY", // 🔐 À personnaliser
-        site_id: "VOTRE_SITE_ID", // 🔐 À personnaliser
-        notify_url: "https://votre-site.com/notify", // webhook serveur
-        mode: "PRODUCTION"
-      });
+<script>
+  function checkout() {
+    CinetPay.setConfig({
+      apikey: '19028667686ed56d2e3fc6.96881271',
+      site_id: '105901553',
+      notify_url: 'https://www.mondomaine.com/notify',
+      return_url: 'https://www.mondomaine.com/return',
+      mode: 'PRODUCTION'
+    });
 
-      CinetPay.getCheckout({
-        transaction_id: transaction_id,
-        amount: price,
-        currency: "XOF",
-        channels: "ALL",
-        description: "Achat: " + productName,
-        customer_email: customer_email,
-        metadata: {
-          product: productName
-        }
-      });
+    CinetPay.getCheckout({
+      transaction_id: Math.floor(Math.random() * 100000000).toString(),
+      amount: 2500,
+      currency: 'XOF',
+      channels: 'ALL',
+      description: 'Paiement DigiBox Market',
+      customer_name: "Kevin",
+      customer_surname: "Baham",
+      customer_email: "kevin@example.com",
+      customer_phone_number: "+22899999999",
+      customer_address: "BP 0024",
+      customer_city: "Lomé",
+      customer_country: "TG",
+      customer_state: "TG",
+      customer_zip_code: "06510",
+      invoice_data: {
+        "Reste à payer": "0 FCFA",
+        "Matricule": "DIGI001",
+        "Année": "2025"
+      }
+    });
 
-      CinetPay.waitResponse(function(data) {
-        if (data.status === "ACCEPTED") {
-          alert("Paiement confirmé ✅");
-          // Redirige vers page de téléchargement sécurisée
-          window.location.href = "telechargement.html?produit=" + encodeURIComponent(productName);
-        } else {
-          alert("Paiement échoué ou annulé ❌");
-        }
-      });
+    CinetPay.waitResponse(function(data) {
+      if (data.status === "REFUSED") {
+        alert("Votre paiement a échoué. Veuillez réessayer.");
+        window.location.reload();
+      } else if (data.status === "ACCEPTED") {
+        alert("✅ Paiement validé avec succès !");
+        localStorage.setItem("digibox_paid", true);
+        window.location.href = "telechargement.html";
+      }
+    });
 
-      CinetPay.onError(function(err) {
-        console.error(err);
-        alert("Erreur de paiement !");
-      });
-    }
-  </script>
+    CinetPay.onError(function(data) {
+      console.error("Erreur de paiement :", data);
+      alert("Une erreur est survenue. Veuillez réessayer.");
+    });
+  }
+</script>
 
 </body>
 </html>

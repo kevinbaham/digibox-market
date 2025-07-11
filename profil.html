@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profil - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .profile-container {
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 30px;
+      background-color: #37393b6b;
+      color: #f1f5f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      text-align: center;
+    }
+    .profile-container h2 {
+      margin-bottom: 20px;
+    }
+    .profile-container p {
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+    }
+    .profile-container a {
+      display: inline-block;
+      margin-top: 20px;
+      color: #3b83f6c7;
+      text-decoration: rgba(105, 105, 105, 0.658);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>DigiBox Market</h1>
+    <nav>
+      <a href="index.html">Accueil</a>
+      <a href="profil.html">Profil</a>
+      <a href="logout.html">Se déconnecter</a>
+    </nav>
+  </header>
+
+  <div class="profile-container">
+    <h2>Profil de l'utilisateur</h2>
+    <p><strong>Email :</strong> <span id="userEmail">Chargement...</span></p>
+    <a href="logout.html">Se déconnecter</a>
+  </div>
+
+  <script>
+    const email = localStorage.getItem("digibox_user") || "Utilisateur Google connecté";
+    document.getElementById("userEmail").innerText = email;
+  </script>
+</body>
+</html>
+
+<!-- Intégration de l'utilisateur dans les pages -->
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const user = localStorage.getItem('digibox_user');
+    const header = document.querySelector('header');
+    if (user && header) {
+      const userTag = document.createElement('div');
+      userTag.textContent = `Connecté en tant que: ${user}`;
+      userTag.style.fontSize = '0.9rem';
+      userTag.style.color = '#38bdf8';
+      userTag.style.marginTop = '5px';
+      header.appendChild(userTag);
+    }
+  });
+</script>
