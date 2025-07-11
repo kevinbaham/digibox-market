@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paiement - DigiBox Market</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Paiement sécurisé - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
   <style>
     body {
@@ -85,53 +85,58 @@
 </footer>
 
 <script>
-  function checkout() {
-    CinetPay.setConfig({
-      apikey: '19028667686ed56d2e3fc6.96881271',
-      site_id: '105901553',
-      notify_url: 'https://www.mondomaine.com/notify',
-      return_url: 'https://www.mondomaine.com/return',
-      mode: 'PRODUCTION'
-    });
+function checkout() {
+  // Calcule automatiquement le total panier depuis localStorage (simulation)
+  let panier = JSON.parse(localStorage.getItem('digibox_cart') || '[]');
+  let total = panier.reduce((sum, item) => sum + item.price, 0) || 2500; // default 2500
 
-    CinetPay.getCheckout({
-      transaction_id: Math.floor(Math.random() * 100000000).toString(),
-      amount: 2500,
-      currency: 'XOF',
-      channels: 'ALL',
-      description: 'Paiement DigiBox Market',
-      customer_name: "Kevin",
-      customer_surname: "Baham",
-      customer_email: "kevin@example.com",
-      customer_phone_number: "+22899999999",
-      customer_address: "BP 0024",
-      customer_city: "Lomé",
-      customer_country: "TG",
-      customer_state: "TG",
-      customer_zip_code: "06510",
-      invoice_data: {
-        "Reste à payer": "0 FCFA",
-        "Matricule": "DIGI001",
-        "Année": "2025"
-      }
-    });
+  CinetPay.setConfig({
+    apikey: '19028667686ed56d2e3fc6.96881271',
+    site_id: '105901553',
+    notify_url: 'https://www.mondomaine.com/notify',
+    return_url: 'https://www.mondomaine.com/return',
+    mode: 'PRODUCTION'
+  });
 
-    CinetPay.waitResponse(function(data) {
-      if (data.status === "REFUSED") {
-        alert("Votre paiement a échoué. Veuillez réessayer.");
-        window.location.reload();
-      } else if (data.status === "ACCEPTED") {
-        alert("✅ Paiement validé avec succès !");
-        localStorage.setItem("digibox_paid", true);
-        window.location.href = "telechargement.html";
-      }
-    });
+  CinetPay.getCheckout({
+    transaction_id: Math.floor(Math.random() * 100000000).toString(),
+    amount: total,
+    currency: 'XOF',
+    channels: 'ALL',
+    description: `Paiement de votre panier DigiBox (${total} FCFA)`,
+    customer_name: "Kevin",
+    customer_surname: "Baham",
+    customer_email: "kevin@example.com",
+    customer_phone_number: "+22899999999",
+    customer_address: "BP 0024",
+    customer_city: "Lomé",
+    customer_country: "TG",
+    customer_state: "TG",
+    customer_zip_code: "06510",
+    invoice_data: {
+      "Total payé": `${total} FCFA`,
+      "Matricule": "DIGI001",
+      "Année": "2025"
+    }
+  });
 
-    CinetPay.onError(function(data) {
-      console.error("Erreur de paiement :", data);
-      alert("Une erreur est survenue. Veuillez réessayer.");
-    });
-  }
+  CinetPay.waitResponse(function(data) {
+    if (data.status === "REFUSED") {
+      alert("❌ Votre paiement a échoué. Veuillez réessayer.");
+      window.location.reload();
+    } else if (data.status === "ACCEPTED") {
+      alert("✅ Paiement validé avec succès !");
+      localStorage.setItem("digibox_paid", true);
+      localStorage.removeItem("digibox_cart"); // vide le panier
+      window.location.href = "telechargement.html";
+    }
+  });
+
+  CinetPay.onError(function(data) {
+    console.error("Erreur paiement :", data);
+    alert("🚨 Une erreur est survenue. Veuillez vérifier votre connexion et réessayer.");
+  });
+}
 </script>
 
 </body>
