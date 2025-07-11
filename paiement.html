@@ -3,141 +3,106 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Paiement sécurisé - DigiBox Market</title>
+  <title>Paiement - DigiBox Market</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
   <style>
     body {
-      font-family:'Segoe UI', sans-serif;
-      background:#f9fafb;
-      color:#333;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      margin: 0;
+      padding: 30px;
     }
-    header, footer {
-      text-align:center;
-      padding:20px;
+    .container {
+      max-width: 600px;
+      background: white;
+      padding: 30px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      text-align: center;
     }
-    .sdk {
-      max-width:500px;
-      margin:60px auto;
-      text-align:center;
-      background:white;
-      padding:30px;
-      border-radius:12px;
-      box-shadow:0 4px 24px #0001;
+    h1 {
+      margin-bottom: 20px;
+      color: #2563eb;
     }
-    .sdk button {
-      background:#16a34a;
-      color:white;
-      border:none;
-      padding:12px 24px;
-      border-radius:8px;
-      font-size:1rem;
-      cursor:pointer;
-      font-weight:bold;
-      transition:0.3s;
+    button {
+      padding: 14px 28px;
+      background-color: #16a34a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 20px;
     }
-    .sdk button:hover {
-      background:#15803d;
+    button:hover {
+      background-color: #15803d;
     }
-    .banner {
-      background:#2563eb;
-      color:white;
-      text-align:center;
-      padding:12px 20px;
-      border-radius:8px;
-      max-width:1000px;
-      margin:20px auto;
-    }
-    .banner a.cta {
-      background:white;
-      color:#2563eb;
-      padding:6px 14px;
-      border-radius:5px;
-      font-weight:bold;
-      text-decoration:none;
-      margin-left:10px;
-    }
-    .banner a.cta:hover {
-      background:#f9fafb;
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #999;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <img src="logo.png" alt="DigiBox Logo" style="height:50px;">
-  <h1>DigiBox Market</h1>
-</header>
+  <div class="container">
+    <h1>Paiement sécurisé via CinetPay</h1>
+    <p>Choisissez votre moyen de paiement (Orange Money, Moov, Wave, carte bancaire...)</p>
+    <button onclick="checkout()">💳 Payer maintenant 2500 FCFA</button>
+  </div>
 
-<div class="banner">
-  🎉 Profitez de nos packs CV + Formations avec -20% !
-  <a href="paiement.html" class="cta">Commander maintenant</a>
-</div>
+  <footer>&copy; 2025 DigiBox Market. Tous droits réservés.</footer>
 
-<main class="sdk">
-  <h2>Paiement sécurisé via CinetPay</h2>
-  <p>Choisissez votre moyen de paiement (Orange Money, Moov, Wave, cartes bancaires...)</p>
-  <button onclick="checkout()">💳 Payer maintenant</button>
-</main>
+  <script>
+    function checkout() {
+      CinetPay.setConfig({
+        apikey: '19028667686ed56d2e3fc6.96881271',
+        site_id: '105901553',
+        notify_url: 'https://digibox-market.firebaseapp.com/notify.html',
+        return_url: 'https://digibox-market.firebaseapp.com/formulaire.html',
+        mode: 'PRODUCTION'
+      });
 
-<footer>
-  <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
-</footer>
+      const transactionId = Math.floor(Math.random() * 1000000000).toString();
 
-<script>
-function checkout() {
-  // Calcule automatiquement le total panier depuis localStorage (simulation)
-  let panier = JSON.parse(localStorage.getItem('digibox_cart') || '[]');
-  let total = panier.reduce((sum, item) => sum + item.price, 0) || 2500; // default 2500
+      CinetPay.getCheckout({
+        transaction_id: transactionId,
+        amount: 2500,
+        currency: 'XOF',
+        channels: 'ALL',
+        description: 'Achat modèle de CV DigiBox',
+        customer_name: 'Utilisateur',
+        customer_surname: 'DigiBox',
+        customer_email: 'cv@digibox.tg',
+        customer_phone_number: '+22800000000',
+        customer_address: 'Lomé',
+        customer_city: 'Lomé',
+        customer_country: 'TG',
+        customer_state: 'TG',
+        customer_zip_code: '00000'
+      });
 
-  CinetPay.setConfig({
-    apikey: '19028667686ed56d2e3fc6.96881271',
-    site_id: '105901553',
-    notify_url: 'https://www.mondomaine.com/notify',
-    return_url: 'https://www.mondomaine.com/return',
-    mode: 'PRODUCTION'
-  });
+      CinetPay.waitResponse(function(data) {
+        if (data.status === "ACCEPTED") {
+          alert("✅ Paiement validé !");
+          localStorage.setItem("digibox_paid", "true");
+          window.location.href = "formulaire.html";
+        } else if (data.status === "REFUSED") {
+          alert("❌ Paiement refusé. Veuillez réessayer.");
+        }
+      });
 
-  CinetPay.getCheckout({
-    transaction_id: Math.floor(Math.random() * 100000000).toString(),
-    amount: total,
-    currency: 'XOF',
-    channels: 'ALL',
-    description: `Paiement de votre panier DigiBox (${total} FCFA)`,
-    customer_name: "Kevin",
-    customer_surname: "Baham",
-    customer_email: "kevin@example.com",
-    customer_phone_number: "+22899999999",
-    customer_address: "BP 0024",
-    customer_city: "Lomé",
-    customer_country: "TG",
-    customer_state: "TG",
-    customer_zip_code: "06510",
-    invoice_data: {
-      "Total payé": `${total} FCFA`,
-      "Matricule": "DIGI001",
-      "Année": "2025"
+      CinetPay.onError(function(data) {
+        console.error("Erreur CinetPay :", data);
+        alert("Une erreur est survenue pendant le paiement.");
+      });
     }
-  });
-
-  CinetPay.waitResponse(function(data) {
-    if (data.status === "REFUSED") {
-      alert("❌ Votre paiement a échoué. Veuillez réessayer.");
-      window.location.reload();
-    } else if (data.status === "ACCEPTED") {
-      alert("✅ Paiement validé avec succès !");
-      localStorage.setItem("digibox_paid", true);
-      localStorage.removeItem("digibox_cart"); // vide le panier
-      window.location.href = "telechargement.html";
-    }
-  });
-
-  CinetPay.onError(function(data) {
-    console.error("Erreur paiement :", data);
-    alert("🚨 Une erreur est survenue. Veuillez vérifier votre connexion et réessayer.");
-  });
-}
-</script>
+  </script>
 
 </body>
 </html>
