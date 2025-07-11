@@ -1,0 +1,79 @@
+<!-- formulaire.html -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer mon CV - DigiBox</title>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f9fafb; padding: 20px; }
+    .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 15px #ccc; }
+    input, textarea { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 6px; }
+    button { background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Formulaire CV</h1>
+    <form id="cvForm">
+      <input type="text" id="prenom" placeholder="Prénom" required>
+      <input type="text" id="nom" placeholder="Nom" required>
+      <input type="email" id="email" placeholder="Email">
+      <input type="text" id="tel" placeholder="Téléphone">
+      <textarea id="objectif" placeholder="Objectif professionnel"></textarea>
+      <textarea id="experience" placeholder="Expériences"></textarea>
+      <textarea id="formation" placeholder="Formations"></textarea>
+      <textarea id="competences" placeholder="Compétences (séparées par des virgules)"></textarea>
+      <textarea id="langues" placeholder="Langues"></textarea>
+      <textarea id="reseaux" placeholder="Réseaux sociaux"></textarea>
+      <button type="submit">Générer mon CV</button>
+    </form>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "VOTRE_API_KEY",
+      authDomain: "VOTRE_PROJET.firebaseapp.com",
+      databaseURL: "https://VOTRE_PROJET.firebaseio.com",
+      projectId: "VOTRE_PROJET",
+      storageBucket: "VOTRE_PROJET.appspot.com",
+      messagingSenderId: "...",
+      appId: "..."
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const queryString = new URLSearchParams(window.location.search);
+    const modele = queryString.get('modele') || '1';
+
+    document.getElementById("cvForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const data = {
+        prenom: prenom.value,
+        nom: nom.value,
+        email: email.value,
+        tel: tel.value,
+        objectif: objectif.value,
+        experience: experience.value,
+        formation: formation.value,
+        competences: competences.value,
+        langues: langues.value,
+        reseaux: reseaux.value,
+        modele: modele
+      };
+
+      // Sauvegarde dans Firebase
+      const key = db.ref("cv").push().key;
+      db.ref("cv/" + key).set(data).then(() => {
+        alert("✅ Données enregistrées ! Redirection vers le modèle...");
+        const params = new URLSearchParams(data).toString();
+        window.location.href = `cv/cv-modele${modele}.html?${params}`;
+      });
+    });
+  </script>
+</body>
+</html>

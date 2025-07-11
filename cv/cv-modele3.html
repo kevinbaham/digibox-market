@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Design Créatif</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body style="background:#f3f4f6; font-family:'Segoe UI', sans-serif; padding:20px;">
+  <div id="cv" style="background:#fff; max-width:900px; margin:auto; padding:30px; border-left:8px solid #9333ea;">
+    <h1 style="color:#9333ea;">Alice Kouassi</h1>
+    <p style="color:#555;">UI/UX Designer | Abidjan, Côte d'Ivoire | alice@mail.com | +225 01 23 45 67</p>
+
+    <h2 style="color:#9333ea;">Objectif</h2>
+    <p>Apporter une touche moderne à vos projets digitaux avec un design centré utilisateur.</p>
+
+    <h2 style="color:#9333ea;">Expériences</h2>
+    <ul>
+      <li>2021–Présent : UX Designer chez VisionApps</li>
+    </ul>
+
+    <h2 style="color:#9333ea;">Formation</h2>
+    <ul>
+      <li>Bachelor UX Design – INPHB Yamoussoukro</li>
+    </ul>
+
+    <h2 style="color:#9333ea;">Compétences</h2>
+    <ul>
+      <li>Figma, Adobe XD, HTML/CSS</li>
+    </ul>
+
+    <h2 style="color:#9333ea;">Langues</h2>
+    <p>Français, Anglais, Espagnol</p>
+  </div>
+  <div style="text-align:center;margin-top:20px">
+    <button onclick="html2pdf().from(document.getElementById('cv')).save('CV-Design.pdf')">Télécharger PDF</button>
+  </div>
+</body>
+</html>

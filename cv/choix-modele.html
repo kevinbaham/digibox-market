@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Choix du Modèle de CV - DigiBox</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f9fafb;
+      padding: 30px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .cv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .cv-card {
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+      background: white;
+      overflow: hidden;
+      transition: transform .2s;
+    }
+    .cv-card:hover {
+      transform: translateY(-5px);
+    }
+    .cv-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .cv-card button {
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sélectionnez un modèle de CV</h1>
+  <div class="cv-grid">
+    <div class="cv-card">
+      <img src="assets/cv1-preview.jpg" alt="Modèle 1">
+      <button onclick="location.href='formulaire.html?modele=1'">Choisir ce modèle</button>
+    </div>
+    <div class="cv-card">
+      <img src="assets/cv2-preview.jpg" alt="Modèle 2">
+      <button onclick="location.href='formulaire.html?modele=2'">Choisir ce modèle</button>
+    </div>
+    <div class="cv-card">
+      <img src="assets/cv3-preview.jpg" alt="Modèle 3">
+      <button onclick="location.href='formulaire.html?modele=3'">Choisir ce modèle</button>
+    </div>
+  </div>
+</body>
+</html>
+
+<!-- formulaire.html : génère dynamiquement le CV avec Firebase -->
+<!-- Ajoutera ensuite un script pour Firebase + sauvegarde -->
+<!-- Backend Firebase (Realtime Database ou Firestore) à ajouter dans un fichier JS séparé -->

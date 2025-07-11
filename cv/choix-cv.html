@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sélection de CV - DigiBox Market</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .cv-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .cv-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .cv-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      height: 300px;
+      object-fit: cover;
+    }
+    .cv-card h3 {
+      margin-top: 10px;
+      color: #2563eb;
+    }
+    .cv-card a {
+      display: inline-block;
+      margin-top: 10px;
+      background: #2563eb;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .cv-card a:hover {
+      background: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <h1>Choisissez un modèle de CV</h1>
+  <div class="cv-grid">
+    <div class="cv-card">
+      <img src="cv/img/modele1.jpg" alt="Modèle 1">
+      <h3>Modèle Moderne</h3>
+      <a href="cv-modele1.html">Utiliser ce modèle</a>
+    </div>
+    <div class="cv-card">
+      <img src="cv/img/modele2.jpg" alt="Modèle 2">
+      <h3>Modèle Classique</h3>
+      <a href="cv-modele2.html">Utiliser ce modèle</a>
+    </div>
+    <div class="cv-card">
+      <img src="cv/img/modele3.jpg" alt="Modèle 3">
+      <h3>Modèle Créatif</h3>
+      <a href="cv-modele3.html">Utiliser ce modèle</a>
+    </div>
+  </div>
+</body>
+</html>
+<a href="choix-cv.html">Créer mon CV</a>

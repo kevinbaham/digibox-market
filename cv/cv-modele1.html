@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CV Moderne Bleu</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body style="font-family: 'Segoe UI', sans-serif; background: #f1f5f9; padding: 30px;">
+  <div id="cv" style="max-width:850px;margin:auto;background:white;border-radius:12px;padding:20px;box-shadow:0 0 15px #ccc;">
+    <div style="text-align:center">
+      <h1 id="nom">Kevin Baham</h1>
+      <p id="titre">Développeur Web</p>
+      <p id="contact">Lomé, Togo | +228 99 99 99 99 | mail@mail.com</p>
+    </div>
+    <hr>
+    <h3 style="color:#2563eb">🎯 Objectif</h3>
+    <p id="objectif">Développeur passionné à la recherche d'une entreprise innovante.</p>
+
+    <h3 style="color:#2563eb">💼 Expérience</h3>
+    <ul id="experience">
+      <li>Freelance (2020-2024) - Création de +30 sites pour PME</li>
+    </ul>
+
+    <h3 style="color:#2563eb">🎓 Formation</h3>
+    <ul id="formation">
+      <li>Licence Pro Web - ISMA Lomé</li>
+    </ul>
+
+    <h3 style="color:#2563eb">🛠️ Compétences</h3>
+    <ul id="competences">
+      <li>HTML / CSS / JavaScript</li>
+    </ul>
+
+    <h3 style="color:#2563eb">🌍 Langues</h3>
+    <p id="langues">Français, Anglais</p>
+
+    <h3 style="color:#2563eb">🔗 Réseaux sociaux</h3>
+    <p id="reseaux">linkedin.com/in/kevinbaham</p>
+  </div>
+  <div style="text-align:center;margin:20px">
+    <button onclick="html2pdf().from(document.getElementById('cv')).save('CV-Moderne.pdf')">Télécharger PDF</button>
+  </div>
+</body>
+</html>
