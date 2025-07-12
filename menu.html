@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu DigiBox Market</title>
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #000;
+      color: white;
+      padding: 12px 20px;
+      position: relative;
+    }
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+    .menu-toggle {
+      font-size: 1.8em;
+      cursor: pointer;
+      color: orange;
+      display: none;
+    }
+    .menu-links {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+    .menu-links a, .user-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .user-links {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+    }
+    .submenu {
+      display: none;
+      flex-direction: column;
+      background: #111;
+      position: absolute;
+      top: 40px;
+      left: 0;
+      min-width: 160px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .submenu a {
+      padding: 10px;
+    }
+    .menu-links li:hover .submenu {
+      display: flex;
+      animation: fadeSlide 0.3s ease forwards;
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(-10px);}
+      to { opacity:1; transform: translateY(0);}
+    }
+    .menu-links ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+    .menu-links li {
+      position: relative;
+    }
+    @media(max-width: 768px){
+      .menu-toggle { display: block; }
+      .menu-links {
+        flex-direction: column;
+        background: #111;
+        position: absolute;
+        top: 60px;
+        left: -220px;
+        width: 200px;
+        padding: 20px;
+        transition: left 0.4s ease;
+      }
+      .menu-links.show { left: 0; }
+      .menu-links .submenu {
+        position: static;
+        background: #222;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+  <div class="logo">DigiBox</div>
+  <ul class="menu-links" id="menu">
+    <li><a href="index.html"><svg width="20" height="20" fill="white"><path d="M10 0L0 7h3v7h4V9h6v5h4V7h3z"/></svg>Accueil</a></li>
+    <li>
+      <a href="#"><svg width="20" height="20" fill="white"><circle cx="10" cy="10" r="9"/></svg>Produits ▾</a>
+      <div class="submenu">
+        <a href="cv.html">CV Pro</a>
+        <a href="formations.html">Formations</a>
+        <a href="ebooks.html">Ebooks</a>
+      </div>
+    </li>
+    <li><a href="catalogue.html"><svg width="20" height="20" fill="white"><rect x="3" y="3" width="14" height="14"/></svg>Catalogue</a></li>
+    <li class="user-links">
+      <a href="profil.html"><svg width="20" height="20" fill="white"><circle cx="10" cy="6" r="4"/><path d="M2 18c0-4 6-6 8-6s8 2 8 6"/></svg>Profil</a>
+      <a href="logout.html">Déconnexion</a>
+    </li>
+  </ul>
+</nav>
+
+<script>
+function toggleMenu() {
+  document.getElementById('menu').classList.toggle('show');
+}
+</script>
+
+</body>
+</html>

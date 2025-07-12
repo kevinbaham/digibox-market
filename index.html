@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DigiBox Market</title>
   <link rel="stylesheet" href="style.css" />
+  <div id="menu-container"></div>
+<script>
+  fetch("menu.html")
+    .then(response => response.text())
+    .then(html => document.getElementById("menu-container").innerHTML = html);
+</script>
+
   <style>
     .typewriter {
       max-width: 800px;
@@ -28,13 +35,7 @@
 
   <header>
     <h1><img src="img/logo.png" alt="DigiBox Market" style="height:40px;" /> DigiBox Market</h1>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="#produits">Produits</a>
-      <a href="login.html">Se connecter</a>
-      <a href="logout.html">Déconnexion</a>
-      <a href="profil.html">Profil</a>
-    </nav>
+    
   </header>
 
   <section class="hero">
