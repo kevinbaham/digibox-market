@@ -1,41 +1,22 @@
-<nav style="background:#302f2f81; color:white; display:flex; justify-content:space-between; align-items:center; padding:10px 20px;">
-  <div style="display:flex; align-items:center;">
-    <img src="img/logo.png" alt="Logo" style="width: 50px; height:30px; margin-right:8px;">
-    <strong>DigiBox Market</strong>
+<nav class="main-menu">
+  <div class="logo">
+    <svg width="30" height="30"><circle cx="15" cy="15" r="12" fill="#2563eb"/></svg> DigiBox
   </div>
-  <div class="menu-toggle" onclick="toggleMenu()" style="font-size:1.8em;cursor:pointer;color:orange;">☰</div>
+  <ul class="menu-links" id="menu-links">
+    <li><a href="index.html">Accueil</a></li>
+    <li>
+      <a href="#">Produits</a>
+      <ul class="submenu">
+        <li><a href="produits.html#ebooks">Ebooks</a></li>
+        <li><a href="produits.html#formations">Formations</a></li>
+        <li><a href="cv/index.html">CV Pro</a></li>
+      </ul>
+    </li>
+    <li><a href="cv/index.html">Catalogue CV</a></li>
+  </ul>
+  <div class="user-links">
+    <a href="profil.html">👤 Profil</a>
+    <a href="logout.html">Déconnexion</a>
+  </div>
+  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 </nav>
-
-<div class="menu-links" id="menu" style="
-  background:#4218187c; color:white; position:absolute; top:50px; left:-250px; width:200px;
-  transition:left 0.4s; border-radius:0 5px 5px 0; overflow:hidden;">
-  <a href="index.html" style="display:block;padding:12px;text-decoration:none;color:white;">Accueil</a>
-  <div>
-    <a href="#" onclick="toggleSubMenu()" style="display:block;padding:12px;text-decoration:none;color:white;">
-      Produits ▼
-    </a>
-    <div id="submenu" style="max-height:0; overflow:hidden; transition:max-height 0.4s;">
-      <a href="produits.html#cv" style="display:block;padding:8px 20px;text-decoration:none;color:white;">📄 CV Pro</a>
-      <a href="produits.html#ebook" style="display:block;padding:8px 20px;text-decoration:none;color:white;">📘 Ebook</a>
-      <a href="produits.html#formation" style="display:block;padding:8px 20px;text-decoration:none;color:white;">🎓 Formation</a>
-    </div>
-  </div>
-  <a href="cv/index.html" style="display:block;padding:12px;text-decoration:none;color:white;">Catalogue</a>
-  <a href="profil.html" style="display:block;padding:12px;text-decoration:none;color:white;">👤 Profil</a>
-  <a href="logout.html" style="display:block;padding:12px;text-decoration:none;color:white;">🚪 Déconnexion</a>
-</div>
-
-<script>
-function toggleMenu(){
-  const menu = document.getElementById('menu');
-  if(menu.style.left === '0px') {
-    menu.style.left = '-250px';
-  } else {
-    menu.style.left = '0px';
-  }
-}
-function toggleSubMenu(){
-  const submenu = document.getElementById('submenu');
-  submenu.style.maxHeight = submenu.style.maxHeight === '0px' ? '200px' : '0px';
-}
-</script>

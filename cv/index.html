@@ -1,39 +1,11 @@
-<!-- === cv/index.html === -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catalogue CV Pro - DigiBox</title>
-  <link rel="stylesheet" href="../style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-</head>
-<body>
-  <div id="menu-container"></div>
-<script>
-fetch("menu.html")
-  .then(r=>r.text())
-  .then(h=>document.getElementById("menu-container").innerHTML=h);
-</script>
-
-<div id="menu-container"></div>
-<script>
-fetch("../menu.html").then(r=>r.text()).then(h=>document.getElementById("menu-container").innerHTML=h);
-</script>
-
-<h1 style="text-align:center;margin:30px 0;">📚 Catalogue des CV professionnels</h1>
-<div class="grid" id="grid"></div>
-
-<script>
-const grid = document.getElementById('grid');
-for(let i=1;i<=100;i++){
-  let preview=localStorage.getItem("cv-preview-"+i)||"../img/default-cv.png";
-  let div=document.createElement('div');
-  div.className='grid-item';
-  div.innerHTML=`<img src="${preview}" alt="CV ${i}" /><p style='text-align:center;'>CV ${i}</p>`;
-  div.onclick=()=>location.href=`choix-cv.html?cv=${i}`;
-  grid.appendChild(div);
-}
-</script>
-</body>
-</html>
+<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8" />
+<title>Catalogue CV</title><link rel="stylesheet" href="../style.css" /><script src="../menu.js"></script>
+</head><body><div id="menu-container"></div>
+<section style="padding:40px;text-align:center;">
+  <h2>📚 Nos modèles de CV Professionnels</h2>
+  <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+    <a href="cv-modele1.html" class="btn-catalogue">CV Moderne</a>
+    <a href="cv-modele2.html" class="btn-catalogue">CV Classique</a>
+    <a href="cv-modele3.html" class="btn-catalogue">CV Créatif</a>
+  </div>
+</section></body></html>
