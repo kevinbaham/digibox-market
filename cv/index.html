@@ -1,45 +1,39 @@
-<!-- Fichier : cv/index.html -->
+<!-- === cv/index.html === -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Choisir un Modèle de CV - DigiBox</title>
-  <link rel="stylesheet" href="../style.css">
-  <style>
-    body { font-family: 'Segoe UI', sans-serif; background: #f4f4f4; padding: 30px; }
-    .cv-grid { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
-    .cv-card { background: #fff; border-radius: 8px; box-shadow: 0 2px 10px #ccc; overflow: hidden; width: 280px; }
-    .cv-card img { width: 100%; height: 350px; object-fit: cover; }
-    .cv-card .content { padding: 16px; text-align: center; }
-    .cv-card a { display: inline-block; margin-top: 10px; padding: 10px 16px; background: #2563eb; color: white; border-radius: 6px; text-decoration: none; font-weight: bold; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catalogue CV Pro - DigiBox</title>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
-  <h1 style="text-align:center;">Choisissez un Modèle de CV</h1>
-  <div class="cv-grid">
-    <div class="cv-card">
-      <img src="../assets/modele1.png" alt="Modèle 1">
-      <div class="content">
-        <h3>Modèle Moderne</h3>
-        <a href="cv-modele1.html">Utiliser ce modèle</a>
-      </div>
-    </div>
-    <div class="cv-card">
-      <img src="../assets/modele2.png" alt="Modèle 2">
-      <div class="content">
-        <h3>Modèle Classique</h3>
-        <a href="cv-modele2.html">Utiliser ce modèle</a>
-      </div>
-    </div>
-    <div class="cv-card">
-      <img src="../assets/modele3.png" alt="Modèle 3">
-      <div class="content">
-        <h3>Modèle Coloré</h3>
-        <a href="cv-modele3.html">Utiliser ce modèle</a>
-      </div>
-    </div>
-  </div>
+  <div id="menu-container"></div>
+<script>
+fetch("menu.html")
+  .then(r=>r.text())
+  .then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
+
+<div id="menu-container"></div>
+<script>
+fetch("../menu.html").then(r=>r.text()).then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
+
+<h1 style="text-align:center;margin:30px 0;">📚 Catalogue des CV professionnels</h1>
+<div class="grid" id="grid"></div>
+
+<script>
+const grid = document.getElementById('grid');
+for(let i=1;i<=100;i++){
+  let preview=localStorage.getItem("cv-preview-"+i)||"../img/default-cv.png";
+  let div=document.createElement('div');
+  div.className='grid-item';
+  div.innerHTML=`<img src="${preview}" alt="CV ${i}" /><p style='text-align:center;'>CV ${i}</p>`;
+  div.onclick=()=>location.href=`choix-cv.html?cv=${i}`;
+  grid.appendChild(div);
+}
+</script>
 </body>
 </html>
-<a href="choix-cv.html">Créer mon CV</a>

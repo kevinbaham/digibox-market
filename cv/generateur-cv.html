@@ -2,209 +2,56 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Générateur de CV - DigiBox Market</title>
-  <link rel="stylesheet" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Générateur CV - DigiBox</title>
+  <link rel="stylesheet" href="../style.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f1f5f9;
-      padding: 30px;
-      margin:0;
-    }
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #000;
-      color: white;
-      padding: 12px 20px;
-      margin-bottom:30px;
-    }
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-    }
-    .menu-toggle {
-      font-size: 1.8em;
-      cursor: pointer;
-      color: orange;
-      display: none;
-    }
-    .menu-links {
-      display: flex;
-      gap: 20px;
-    }
-    .menu-links a, .user-links a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .user-links {
-      display: flex;
-      gap: 15px;
-      align-items: center;
-    }
-    .user-icon {
-      font-size: 1.5em;
-    }
-    @media(max-width: 768px){
-      .menu-toggle { display: block; }
-      .menu-links {
-        flex-direction: column;
-        background: #111;
-        position: absolute;
-        top: 60px;
-        left: -200px;
-        width: 180px;
-        padding: 20px;
-        transition: left 0.3s;
-      }
-      .menu-links.show {
-        left: 0;
-      }
-    }
-
-    /* générateur */
-    .container {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-    }
-    .form-section, .preview-section {
-      flex: 1;
-      min-width: 300px;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
-    input, textarea, select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-    }
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-      margin-top:5px;
-    }
-    button:hover {
-      background:#1d4ed8;
-    }
-    .cv-box h2, .cv-box p, .cv-box ul {
-      margin: 10px 0;
-    }
+    body { font-family:'Segoe UI',sans-serif; background:#f1f5f9; padding:20px; }
+    .cv-box { max-width:800px; background:white; margin:auto; padding:30px; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.1);}
+    h1,h3 { color:#2563eb; }
+    .btn { display:inline-block; margin-top:20px; background:#2563eb; color:white; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; }
   </style>
 </head>
 <body>
+<div id="menu-container"></div>
+<script>
+fetch("menu.html")
+  .then(r=>r.text())
+  .then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
 
-<nav>
-  <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  <div class="logo">Digibox market</div>
-  <div class="menu-links" id="menu">
-    <a href="../index.html">Accueil</a>
-    <a href="../produits.html">Produits</a>
-    <a href="../catalogue.html">Catalogue</a>
-  </div>
-  <div class="user-links">
-    <a href="../profil.html"><span class="user-icon">👤</span></a>
-    <a href="../logout.html">Déconnexion</a>
-  </div>
-</nav>
+<div id="menu-container"></div>
+<script>
+fetch("../menu.html").then(r=>r.text()).then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
 
-<h1>📄 Générateur de CV Professionnel</h1>
-<div class="container">
-  <div class="form-section">
-    <h2>Informations</h2>
-    <input type="text" id="prenom" placeholder="Prénom">
-    <input type="text" id="nom" placeholder="Nom">
-    <input type="email" id="email" placeholder="Email">
-    <input type="text" id="telephone" placeholder="Téléphone">
-    <textarea id="objectif" placeholder="Objectif professionnel"></textarea>
-    <textarea id="experience" placeholder="Expériences professionnelles"></textarea>
-    <textarea id="diplomes" placeholder="Diplômes et formations"></textarea>
-    <textarea id="competences" placeholder="Compétences (séparées par des virgules)"></textarea>
-    <textarea id="langues" placeholder="Langues"></textarea>
-    <textarea id="reseaux" placeholder="Réseaux sociaux (LinkedIn, GitHub, etc.)"></textarea>
-    <label for="template">Choisir un modèle :</label>
-    <select id="template">
-      <option value="moderne">Moderne</option>
-      <option value="classique">Classique</option>
-      <option value="creatif">Créatif</option>
-    </select>
-    <button onclick="previewCV()">Voir le CV</button>
-    <button onclick="generatePDF()" style="background:#16a34a;">Télécharger CV PDF</button>
-  </div>
-
-  <div class="preview-section">
-    <h2>Prévisualisation</h2>
-    <div id="cv-preview" class="cv-box" style="padding:10px; background:#fff;">
-      <p>Remplissez le formulaire pour générer votre CV.</p>
-    </div>
-  </div>
-</div>
+<div class="cv-box" id="cv"></div>
+<a href="#" class="btn" onclick="exportPDF()">📄 Exporter en PDF</a>
 
 <script>
-function toggleMenu() {
-  document.getElementById('menu').classList.toggle('show');
+const data = JSON.parse(localStorage.getItem('cvFormData'));
+if(!data) {
+  alert("Veuillez remplir le formulaire d'abord.");
+  window.location.href = "formulaire.html";
 }
 
-if (!localStorage.getItem('digibox_user')) {
-  alert("Veuillez vous connecter pour accéder au générateur.");
-  window.location.href = "../login.html";
-}
+document.getElementById('cv').innerHTML = `
+  <h1 contenteditable="true">${data.prenom} ${data.nom}</h1>
+  <p contenteditable="true">${data.email} | ${data.tel}</p>
+  <h3>Objectif</h3><p contenteditable="true">${data.objectif}</p>
+  <h3>Expériences</h3><p contenteditable="true">${data.experience}</p>
+  <h3>Formation</h3><p contenteditable="true">${data.formation}</p>
+  <h3>Compétences</h3><p contenteditable="true">${data.competences}</p>
+`;
 
-function previewCV() {
-  const cv = document.getElementById('cv-preview');
-  const prenom = document.getElementById('prenom').value;
-  const nom = document.getElementById('nom').value;
-  const email = document.getElementById('email').value;
-  const tel = document.getElementById('telephone').value;
-  const objectif = document.getElementById('objectif').value;
-  const exp = document.getElementById('experience').value;
-  const dipl = document.getElementById('diplomes').value;
-  const comp = document.getElementById('competences').value.split(',');
-  const langues = document.getElementById('langues').value;
-  const reseaux = document.getElementById('reseaux').value;
-  const model = document.getElementById('template').value;
-
-  cv.innerHTML = `
-    <h2>${prenom} ${nom}</h2>
-    <p><strong>Email :</strong> ${email}</p>
-    <p><strong>Téléphone :</strong> ${tel}</p>
-    <h3>Objectif professionnel</h3>
-    <p>${objectif}</p>
-    <h3>Expériences</h3>
-    <p>${exp}</p>
-    <h3>Diplômes</h3>
-    <p>${dipl}</p>
-    <h3>Compétences</h3>
-    <ul>${comp.map(c => `<li>${c.trim()}</li>`).join('')}</ul>
-    <h3>Langues</h3>
-    <p>${langues}</p>
-    <h3>Réseaux</h3>
-    <p>${reseaux}</p>
-    <p><strong>Modèle choisi :</strong> ${model}</p>
-  `;
-}
-
-function generatePDF() {
-  if (!localStorage.getItem("digibox_paid")) {
+function exportPDF(){
+  if (!localStorage.getItem('digibox_paid')) {
     alert("Merci d'effectuer le paiement avant de télécharger.");
     window.location.href = "../paiement.html";
     return;
   }
-  const element = document.getElementById('cv-preview');
-  html2pdf().from(element).save('CV.pdf');
+  html2pdf().from(document.getElementById('cv')).save('CV-Generateur.pdf');
 }
 </script>
 </body>

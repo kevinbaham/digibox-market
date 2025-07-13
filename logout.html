@@ -19,6 +19,13 @@
   </style>
 </head>
 <body>
+  <div id="menu-container"></div>
+<script>
+fetch("menu.html")
+  .then(r=>r.text())
+  .then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
+
   <div class="logout-container">
     <h2>Vous êtes maintenant déconnecté</h2>
     <p>Merci pour votre visite sur DigiBox Market.</p>

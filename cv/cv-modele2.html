@@ -1,79 +1,65 @@
-<!-- cv/cv-modele2.html -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>CV Modèle 2 – DigiBox</title>
-  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Classique - DigiBox</title>
+  <link rel="stylesheet" href="../style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
   <style>
-    body { background: #eef2f7; font-family: 'Segoe UI', sans-serif; padding: 30px; }
-    .configure, .download-buttons { text-align: center; margin: 20px 0; }
-    .cv-box { max-width: 900px; margin: auto; background: white; border-left: 6px solid #2563eb;
-      padding: 30px; box-shadow: 0 0 15px rgba(0,0,0,0.1); border-radius:8px; }
-    .header { display: flex; align-items: center; gap:20px; }
-    .header img { width:100px; height:100px; object-fit:cover; border-radius:50%; cursor:pointer; }
-    h1, h3 { margin: 5px 0; color: #2563eb; }
-    .btn-pdf, .btn-word { margin: 5px 10px; padding:12px 20px; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
-    .btn-pdf { background: #16a34a; color: white; }
-    .btn-word { background: #2563eb; color: white; }
+    body { font-family:'Georgia',serif; background:#f4f4f4; padding:20px; }
+    .cv-container { background:white; border:2px solid #ddd; max-width:800px; margin:auto; padding:30px; }
+    h1 { border-bottom:2px solid #2563eb; padding-bottom:5px; }
+    h3 { color:#333; margin-top:20px; }
+    p, li { font-size:0.95rem; }
+    .btn { display:inline-block; margin-top:15px; background:#2563eb; color:white; padding:10px 20px; border-radius:6px; text-decoration:none; font-weight:bold; }
   </style>
 </head>
 <body>
-
-<div class="configure">
-  💳 Paiement requis : 1000 FCFA
-  <button onclick="payer()">Payer maintenant</button>
-</div>
-
-<div class="cv-box" id="cv">
-  <div class="header">
-    <img id="photo" src="../assets/profile-placeholder.jpg" alt="Ajoutez votre photo" onclick="upload.click()">
-    <div>
-      <h1 contenteditable="true" id="nom">Votre Nom Complet</h1>
-      <p contenteditable="true" id="poste">Poste / Métier</p>
-      <p contenteditable="true" id="contact">Email • Téléphone • Ville</p>
-    </div>
-  </div>
-  <input type="file" id="upload" accept="image/*" style="display:none" onchange="ajouterPhoto(event)">
-
-  <div class="section"><h3>Profil</h3><div contenteditable="true" id="objectif">Résumé de profil...</div></div>
-  <div class="section"><h3>Expériences</h3><div contenteditable="true" id="experience">Détail des expériences...</div></div>
-  <div class="section"><h3>Formations</h3><div contenteditable="true" id="formation">Détail des formations...</div></div>
-  <div class="section"><h3>Compétences</h3><div contenteditable="true" id="competences">HTML, CSS, JS...</div></div>
-  <div class="section"><h3>Langues</h3><div contenteditable="true" id="langues">Français, Anglais...</div></div>
-  <div class="section"><h3>Réseaux</h3><div contenteditable="true" id="reseaux">LinkedIn • GitHub...</div></div>
-</div>
-
-<div class="download-buttons" style="display:none;">
-  <button class="btn-pdf" onclick="downloadPDF()">Télécharger PDF</button>
-  <button class="btn-word" onclick="downloadDoc()">Télécharger Word</button>
-</div>
-
+<div id="menu-container"></div>
 <script>
-  const paid = localStorage.getItem('digibox_paid') === 'true';
-  document.querySelector('.configure').style.display = paid ? 'none' : 'block';
-  document.querySelector('.download-buttons').style.display = paid ? 'block' : 'none';
-
-  function payer(){
-    localStorage.setItem('digibox_paid', 'true');
-    location.reload();
-  }
-  function ajouterPhoto(e){
-    const reader = new FileReader();
-    reader.onload = () => document.getElementById('photo').src = reader.result;
-    reader.readAsDataURL(e.target.files[0]);
-  }
-  function downloadPDF(){
-    if (!paid) return alert("Paiement requis.");
-    html2pdf().from(document.getElementById('cv')).save('CV-modèle2.pdf');
-  }
-  function downloadDoc(){
-    if (!paid) return alert("Paiement requis.");
-    const blob = new Blob([document.getElementById('cv').outerHTML], {type:"application/msword"});
-    saveAs(blob, 'CV-modele2.doc');
-  }
+fetch("menu.html")
+  .then(r=>r.text())
+  .then(h=>document.getElementById("menu-container").innerHTML=h);
 </script>
 
+<div id="menu-container"></div>
+<script>
+fetch("../menu.html").then(r=>r.text()).then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
+
+<div class="cv-container" id="cv">
+  <h1 contenteditable="true">Kevin Baham</h1>
+  <p contenteditable="true">kevin@mail.com | +228 99 99 99 99</p>
+  <h3>Profil</h3>
+  <p contenteditable="true">Développeur web rigoureux, passionné par les nouvelles technologies.</p>
+  <h3>Expériences</h3>
+  <ul>
+    <li contenteditable="true"><strong>Freelance</strong> - Développement de sites PME (2020-2024)</li>
+    <li contenteditable="true"><strong>Stage CreativeStudio</strong> - UX/UI (2019)</li>
+  </ul>
+  <h3>Formation</h3>
+  <ul>
+    <li contenteditable="true">Licence Développement Web - ISMA (2019)</li>
+    <li contenteditable="true">BTS Informatique - CEFOP (2017)</li>
+  </ul>
+  <h3>Compétences</h3>
+  <p contenteditable="true">JavaScript, PHP, SQL, HTML/CSS</p>
+  <h3>Langues</h3>
+  <p contenteditable="true">Français, Anglais</p>
+</div>
+
+<a href="#" class="btn" onclick="downloadPDF()">📄 Exporter en PDF</a>
+
+<script>
+function downloadPDF(){
+  if (!localStorage.getItem('digibox_paid')) {
+    alert(\"Merci d'effectuer le paiement avant de télécharger.\");
+    window.location.href = \"../paiement.html\";
+    return;
+  }
+  html2pdf().from(document.getElementById('cv')).save('CV-Classique.pdf');
+}
+</script>
 </body>
 </html>

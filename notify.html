@@ -26,6 +26,12 @@
   </style>
 </head>
 <body>
+<div id="menu-container"></div>
+<script>
+fetch("menu.html")
+  .then(r=>r.text())
+  .then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
 
 <div class="box">
   <h2>🛎 Notification de paiement</h2>

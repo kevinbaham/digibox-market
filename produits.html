@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      background-image: url('img/fond-site.jpg');
+      background-image: url('img/background.jpg');
       background-size: cover;
       background-attachment: fixed;
       background-position: center;
@@ -15,9 +15,17 @@
   </style>
 </head>
 <body>
+  
+  <div id="menu-container"></div>
+<script>
+fetch("menu.html")
+  .then(r=>r.text())
+  .then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
+
   <header>
     <nav class="navbar">
-      <img src="logo.png" alt="DigiBox Logo" class="logo">
+      <img src="img/logo.jpg" alt="DigiBox Logo" class="logo">
       <h1>DigiBox Market</h1>
       <a href="index.html">Accueil</a>
       <a href="produits.html" class="active">Produits</a>
