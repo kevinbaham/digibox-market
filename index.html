@@ -1,14 +1,85 @@
-<!DOCTYPE html><html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-<meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DigiBox Market</title>
-<link rel="stylesheet" href="style.css" /><script src="menu.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-<div id="menu-container"></div>
-<section style="padding:40px;text-align:center;">
-  <h1>Bienvenue sur DigiBox</h1>
-  <p>Le marché des CV, ebooks et formations.</p>
-  <a href="cv/index.html" class="btn-catalogue">Voir nos CV ➔</a>
-</section>
-</body></html>
+
+  <!-- Injection du menu -->
+  <div id="menu-container"></div>
+  <script>
+    fetch("menu.html")
+      .then(response => response.text())
+      .then(html => document.getElementById("menu-container").innerHTML = html);
+  </script>
+
+  <section class="hero">
+    <h2>Bienvenue sur DigiBox Market, votre boutique en ligne</h2>
+    <div class="typewriter" id="story"></div>
+  </section>
+
+  <section class="explore-cv">
+    <h2>📚 Découvrez nos 100 modèles de CV</h2>
+    <p>Des CV modernes, prêts à personnaliser et télécharger.</p>
+    <a href="cv/index.html" class="btn-catalogue">Voir le catalogue des CV ➔</a>
+  </section>
+
+  <section class="products-container" id="produits">
+    <h2>Nos Produits</h2>
+    <div class="product-list">
+      <div class="product-card">
+        <img src="img/cv-canva-1.png" alt="CV Canva Bleu Pro" />
+        <h3>CV Canva Bleu Pro</h3>
+        <p>Modèle modifiable sur Canva</p>
+        <p class="price">1000 FCFA</p>
+        <a href="paiement.html?produit=CV Canva Bleu Pro&prix=1000">Acheter</a>
+      </div>
+      <div class="product-card">
+        <img src="img/ebook.png" alt="Ebook SEO" />
+        <h3>Ebook SEO</h3>
+        <p>Apprenez le référencement</p>
+        <p class="price">3000 FCFA</p>
+        <a href="paiement.html?produit=ebook-marketing&prix=3000">Acheter</a>
+      </div>
+      <div class="product-card">
+        <img src="img/formation.png" alt="Formation Canva" />
+        <h3>Formation Canva</h3>
+        <p>Maîtrisez Canva en 2h</p>
+        <p class="price">5000 FCFA</p>
+        <a href="paiement.html?produit=formation-canva&prix=5000">Acheter</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
+    <img src="img/logo.png" alt="DigiBox Market" style="height:30px;" />
+    <p><a href="https://wa.me/22879664863" target="_blank">Contacter WhatsApp</a></p>
+  </footer>
+
+  <!-- Effet machine à écrire -->
+  <script>
+    const storyText = `
+Il était une fois un jeune créatif qui voulait trouver des CV, ebooks et formations de qualité.
+Il créa DigiBox Market : rapide, simple et fiable.
+📂 Des CV prêts à l’emploi
+📘 Des ebooks pour progresser
+🎓 Des formations utiles
+Bienvenue chez vous. Explorez, téléchargez, grandissez !`;
+    let i = 0;
+    const speed = 35;
+    function typeWriter() {
+      if (i < storyText.length) {
+        document.getElementById("story").innerHTML += storyText.charAt(i);
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    }
+    window.onload = typeWriter;
+  </script>
+
+</body>
+</html>

@@ -1,1 +1,101 @@
-<!DOCTYPE html><html lang='fr'><head><meta charset='UTF-8'><title>Formulaire CV</title></head><body><form id='cv-form'></form></body></html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Formulaire CV - DigiBox</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f1f5f9;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #0002;
+    }
+    h1 { text-align:center; margin-bottom: 30px; }
+    label { display: block; margin: 12px 0 6px; font-weight: bold; }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover { background: #1e40af; }
+  </style>
+</head>
+<body>
+
+<div id="menu-container"></div>
+<script>
+fetch("../menu.html")
+  .then(res => res.text())
+  .then(html => document.getElementById("menu-container").innerHTML = html);
+</script>
+
+<div class="container">
+  <h1>📝 Remplissez votre CV</h1>
+  <form action="generateur-cv.html" method="GET">
+    <label for="prenom">Prénom</label>
+    <input type="text" id="prenom" name="prenom" required>
+
+    <label for="nom">Nom</label>
+    <input type="text" id="nom" name="nom" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="tel">Téléphone</label>
+    <input type="text" id="tel" name="tel">
+
+    <label for="objectif">Objectif Professionnel</label>
+    <textarea id="objectif" name="objectif"></textarea>
+
+    <label for="experience">Expériences</label>
+    <textarea id="experience" name="experience"></textarea>
+
+    <label for="diplomes">Diplômes</label>
+    <textarea id="diplomes" name="diplomes"></textarea>
+
+    <label for="competences">Compétences (séparées par virgules)</label>
+    <textarea id="competences" name="competences"></textarea>
+
+    <label for="langues">Langues</label>
+    <textarea id="langues" name="langues"></textarea>
+
+    <label for="reseaux">Réseaux (LinkedIn, GitHub...)</label>
+    <textarea id="reseaux" name="reseaux"></textarea>
+
+    <label for="template">Choisir un modèle</label>
+    <select id="template" name="template">
+      <option value="modele1">Modèle 1 - Moderne</option>
+      <option value="modele2">Modèle 2 - Élégant</option>
+      <option value="modele3">Modèle 3 - Créatif</option>
+    </select>
+
+    <button type="submit">Générer mon CV ➔</button>
+  </form>
+</div>
+
+</body>
+</html>
