@@ -1,128 +1,35 @@
 <nav class="navbar">
   <div class="logo">
-    <!-- SVG logo -->
-    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" viewBox="0 0 24 24">
-      <path d="M12 2L2 7l10 5 10-5-10-5zm0 7.2L4.4 7 12 3.8 19.6 7 12 9.2z"/>
-      <path d="M2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="white" stroke-width="2"/>
-    </svg>
-    <span style="margin-left:8px;">DigiBox</span>
+    <img src="assets/img/logo.jpg" alt="DigiBox" style="height:35px; vertical-align:middle;">
+    <span>DigiBox Market</span>
   </div>
+
   <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-  <ul class="menu-links" id="menu">
-    <li><a href="../index.html">🏠 Accueil</a></li>
+
+  <ul class="menu" id="mainMenu">
+    <li><a href="index.html">Accueil</a></li>
     <li class="has-submenu">
-      <a href="#">🛍️ Produits ▼</a>
+      <a href="#">Produits ▼</a>
       <ul class="submenu">
-        <li><a href="../produits.html#ebooks">📘 Ebooks</a></li>
-        <li><a href="../produits.html#formations">🎓 Formations</a></li>
-        <li><a href="../cv/index.html">📄 CV Pro</a></li>
+        <li><a href="cv/index.html">CV Pro</a></li>
+        <li><a href="produits.html#ebooks">Ebooks</a></li>
+        <li><a href="produits.html#formations">Formations</a></li>
       </ul>
     </li>
-    <li><a href="../cv/choix-cv.html">📂 Catalogue</a></li>
+    <li><a href="cv/index.html">Catalogue CV</a></li>
   </ul>
+
   <div class="user-links">
-    <a href="../profil.html">👤 Profil</a>
-    <a href="../logout.html">🚪 Déconnexion</a>
+    <a href="profil.html" title="Profil">
+      <svg width="24" height="24" fill="currentColor">
+        <circle cx="12" cy="8" r="4"/>
+        <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+      </svg>
+    </a>
+    <a href="logout.html" title="Déconnexion">
+      <svg width="24" height="24" fill="currentColor">
+        <path d="M16 17l5-5-5-5M21 12H9m-5 9V3"/>
+      </svg>
+    </a>
   </div>
 </nav>
-
-<style>
-  .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #2563eb;
-    color: white;
-    padding: 12px 20px;
-    position: relative;
-  }
-  .navbar .logo {
-    display: flex;
-    align-items: center;
-    font-size: 1.3rem;
-    font-weight: bold;
-  }
-  .menu-toggle {
-    font-size: 1.8rem;
-    cursor: pointer;
-    display: none;
-  }
-  .menu-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-  }
-  .menu-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s;
-  }
-  .menu-links a:hover {
-    transform: scale(1.1);
-    color: #dbeafe;
-  }
-  .has-submenu {
-    position: relative;
-  }
-  .has-submenu .submenu {
-    display: none;
-    position: absolute;
-    top: 35px;
-    left: 0;
-    background: #1e3a8a;
-    list-style: none;
-    border-radius: 6px;
-    overflow: hidden;
-    animation: fadeIn 0.3s ease;
-  }
-  .has-submenu:hover .submenu {
-    display: block;
-  }
-  .submenu li a {
-    display: block;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-  }
-  .submenu li a:hover {
-    background: #3749bb;
-  }
-  .user-links a {
-    margin-left: 20px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .user-links a:hover {
-    color: #dbeafe;
-  }
-
-  @media(max-width: 768px){
-    .menu-toggle { display: block; }
-    .menu-links {
-      flex-direction: column;
-      background: #1e3a8a;
-      position: absolute;
-      top: 60px;
-      left: -220px;
-      width: 200px;
-      padding: 20px;
-      border-radius: 8px;
-      transition: left 0.4s ease;
-    }
-    .menu-links.show { left: 10px; }
-    .user-links { display: none; }
-  }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px);}
-    to { opacity: 1; transform: translateY(0);}
-  }
-</style>
-
-<script>
-function toggleMenu(){
-  document.getElementById("menu").classList.toggle("show");
-}
-</script>

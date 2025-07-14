@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DigiBox Market</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>DigiBox Market - Accueil</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Injection du menu -->
+  <!-- Menu chargé dynamiquement -->
   <div id="menu-container"></div>
+
   <script>
     fetch("menu.html")
-      .then(response => response.text())
+      .then(res => res.text())
       .then(html => document.getElementById("menu-container").innerHTML = html);
   </script>
 
@@ -21,7 +23,7 @@
     <div class="typewriter" id="story"></div>
   </section>
 
-  <section class="explore-cv">
+  <section class="explore-cv" style="text-align:center; padding:40px;">
     <h2>📚 Découvrez nos 100 modèles de CV</h2>
     <p>Des CV modernes, prêts à personnaliser et télécharger.</p>
     <a href="cv/index.html" class="btn-catalogue">Voir le catalogue des CV ➔</a>
@@ -31,55 +33,81 @@
     <h2>Nos Produits</h2>
     <div class="product-list">
       <div class="product-card">
-        <img src="img/cv-canva-1.png" alt="CV Canva Bleu Pro" />
+        <img src="assets/img/cv-canva-1.png" alt="CV Canva Bleu Pro" />
         <h3>CV Canva Bleu Pro</h3>
-        <p>Modèle modifiable sur Canva</p>
+        <p>Modèle 100% modifiable sur Canva</p>
         <p class="price">1000 FCFA</p>
         <a href="paiement.html?produit=CV Canva Bleu Pro&prix=1000">Acheter</a>
       </div>
       <div class="product-card">
-        <img src="img/ebook.png" alt="Ebook SEO" />
-        <h3>Ebook SEO</h3>
-        <p>Apprenez le référencement</p>
-        <p class="price">3000 FCFA</p>
-        <a href="paiement.html?produit=ebook-marketing&prix=3000">Acheter</a>
+        <img src="assets/img/cv-pro.png" alt="Modèle CV Pro" />
+        <h3>Modèle CV Pro</h3>
+        <p>CV moderne, facile à éditer</p>
+        <p class="price">2000 FCFA</p>
+        <a href="paiement.html?produit=Modèle CV Pro&prix=2000">Acheter</a>
       </div>
       <div class="product-card">
-        <img src="img/formation.png" alt="Formation Canva" />
+        <img src="assets/img/ebook.png" alt="Ebook SEO" />
+        <h3>Ebook SEO</h3>
+        <p>Apprenez le référencement facilement</p>
+        <p class="price">3000 FCFA</p>
+        <a href="paiement.html?produit=Ebook SEO&prix=3000">Acheter</a>
+      </div>
+      <div class="product-card">
+        <img src="assets/img/formation.png" alt="Formation Canva" />
         <h3>Formation Canva</h3>
-        <p>Maîtrisez Canva en 2h</p>
+        <p>Maîtrisez Canva comme un pro</p>
         <p class="price">5000 FCFA</p>
-        <a href="paiement.html?produit=formation-canva&prix=5000">Acheter</a>
+        <a href="paiement.html?produit=Formation Canva&prix=5000">Acheter</a>
       </div>
     </div>
   </section>
 
   <footer>
     <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
-    <img src="img/logo.png" alt="DigiBox Market" style="height:30px;" />
-    <p><a href="https://wa.me/22879664863" target="_blank">Contacter WhatsApp</a></p>
+    <img src="assets/img/logo.jpg" alt="DigiBox Market" />
+    <p><a href="https://wa.me/22879664863" target="_blank">Contact WhatsApp</a></p>
   </footer>
 
-  <!-- Effet machine à écrire -->
+  <!-- Boutons flottants -->
+  <a href="cv/index.html" class="floating-cv-btn">📚 CV</a>
+  <a href="#" class="floating-btn" onclick="openCart()">🛒 Panier</a>
+
+  <!-- Panier modal -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeCart()">&times;</span>
+      <h3>🛒 Votre panier</h3>
+      <ul class="cart-list" id="cartItems"></ul>
+      <p><strong>Total :</strong> <span id="cartTotal">0</span> FCFA</p>
+      <button class="pay-btn" onclick="payNow()">Payer maintenant</button>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
   <script>
     const storyText = `
-Il était une fois un jeune créatif qui voulait trouver des CV, ebooks et formations de qualité.
-Il créa DigiBox Market : rapide, simple et fiable.
+Il était une fois un jeune créatif fatigué de chercher des CV, ebooks et formations de qualité.
+Un jour, il se dit : "Pourquoi ne pas créer un endroit simple, rapide et fiable ?"
+
+C’est ainsi que DigiBox Market est né. Un lieu pensé pour toi :
 📂 Des CV prêts à l’emploi
-📘 Des ebooks pour progresser
-🎓 Des formations utiles
-Bienvenue chez vous. Explorez, téléchargez, grandissez !`;
-    let i = 0;
-    const speed = 35;
+📘 Des ebooks utiles
+🎓 Des formations pour progresser
+
+Tu es ici chez toi. Explore, télécharge, apprends, progresse.
+Le futur, c’est maintenant. Bienvenue dans la boîte !
+`;
+    let index = 0;
+    const speed = 30;
     function typeWriter() {
-      if (i < storyText.length) {
-        document.getElementById("story").innerHTML += storyText.charAt(i);
-        i++;
+      if (index < storyText.length) {
+        document.getElementById("story").innerHTML += storyText.charAt(index);
+        index++;
         setTimeout(typeWriter, speed);
       }
     }
     window.onload = typeWriter;
   </script>
-
 </body>
 </html>
