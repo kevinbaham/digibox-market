@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Déconnexion - DigiBox Market</title>
-  <link rel="stylesheet" href="style.css">
   <style>
-    .logout-container {
-      max-width: 400px;
-      margin: 100px auto;
-      padding: 30px;
-      background-color: #1e293b;
+    body {
+      background: #0f172a;
       color: #f1f5f9;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
       text-align: center;
+    }
+    .message {
+      background: #1e293b;
+      padding: 30px;
       border-radius: 12px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
   </style>
 </head>
 <body>
-  <div id="menu-container"></div>
-<script>
-fetch("menu.html")
-  .then(r=>r.text())
-  .then(h=>document.getElementById("menu-container").innerHTML=h);
-</script>
-
-  <div class="logout-container">
-    <h2>Vous êtes maintenant déconnecté</h2>
-    <p>Merci pour votre visite sur DigiBox Market.</p>
-    <a class="btn-catalogue" href="login.html">Connexion</a>
+  <div class="message">
+    <h1>👋 Vous êtes maintenant déconnecté</h1>
+    <p>Redirection vers la page de connexion dans quelques secondes...</p>
   </div>
+
   <script>
+    // Effacer toutes les données de session
     localStorage.removeItem('digibox_user');
     localStorage.removeItem('digibox_google_login');
+    localStorage.removeItem('cart');
+    localStorage.removeItem('digibox_paid');
+
+    // Attendre 3s puis rediriger
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 3000);
   </script>
 </body>
 </html>

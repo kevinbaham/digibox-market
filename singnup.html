@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Déconnexion - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .logout-container {
+      max-width: 400px;
+      margin: 100px auto;
+      padding: 30px;
+      background-color: #1e293b;
+      color: #f1f5f9;
+      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body>
+  <div id="menu-container"></div>
+<script>
+fetch("menu.html")
+  .then(r=>r.text())
+  .then(h=>document.getElementById("menu-container").innerHTML=h);
+</script>
+
+  <div class="logout-container">
+    <h2>Vous êtes maintenant déconnecté</h2>
+    <p>Merci pour votre visite sur DigiBox Market.</p>
+    <a class="btn-catalogue" href="login.html">Connexion</a>
+  </div>
+  <script>
+    localStorage.removeItem('digibox_user');
+    localStorage.removeItem('digibox_google_login');
+  </script>
+</body>
+</html>

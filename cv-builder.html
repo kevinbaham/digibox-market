@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Constructeur de CV - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family:'Segoe UI', sans-serif; background:#f1f5f9; color:#333; }
+    .container { max-width:1200px; margin:30px auto; display:flex; gap:40px; flex-wrap:wrap; }
+    .form-section, .preview-section { flex:1; min-width:300px; background:#fff; padding:20px; border-radius:10px; box-shadow:0 0 15px rgba(0,0,0,0.1); }
+    input, textarea { width:100%; padding:10px; margin-bottom:12px; border-radius:6px; border:1px solid #ccc; }
+    button { background:#2563eb; color:#fff; padding:12px 20px; border:none; border-radius:6px; font-weight:bold; cursor:pointer; transition:0.3s; }
+    button:hover { background:#1e40af; }
+    .cv-preview h2, .cv-preview p, .cv-preview ul { margin:8px 0; }
+  </style>
+</head>
+<body>
+
+<h1 style="text-align:center;margin:20px;">✍ Générateur de CV DigiBox</h1>
+
+<div class="container">
+  <!-- FORMULAIRE -->
+  <div class="form-section">
+    <h2>📝 Informations</h2>
+    <input type="text" id="prenom" placeholder="Prénom" />
+    <input type="text" id="nom" placeholder="Nom" />
+    <input type="email" id="email" placeholder="Email" />
+    <input type="text" id="tel" placeholder="Téléphone" />
+    <textarea id="objectif" placeholder="Objectif professionnel"></textarea>
+    <textarea id="experience" placeholder="Expériences pro"></textarea>
+    <textarea id="education" placeholder="Éducation & diplômes"></textarea>
+    <textarea id="competences" placeholder="Compétences (séparées par des virgules)"></textarea>
+    <textarea id="langues" placeholder="Langues"></textarea>
+    <textarea id="reseaux" placeholder="Réseaux sociaux"></textarea>
+    <button onclick="updatePreview()">Prévisualiser</button>
+    <button onclick="exportPDF()" style="background:#16a34a;margin-top:10px;">Télécharger en PDF</button>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-section">
+    <h2>👀 Aperçu CV</h2>
+    <div class="cv-preview" id="cv-preview">
+      <p>Remplissez les champs pour voir votre CV.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function updatePreview() {
+  const cv = document.getElementById('cv-preview');
+  const prenom = document.getElementById('prenom').value;
+  const nom = document.getElementById('nom').value;
+  const email = document.getElementById('email').value;
+  const tel = document.getElementById('tel').value;
+  const objectif = document.getElementById('objectif').value;
+  const exp = document.getElementById('experience').value;
+  const edu = document.getElementById('education').value;
+  const comp = document.getElementById('competences').value.split(',');
+  const langues = document.getElementById('langues').value;
+  const reseaux = document.getElementById('reseaux').value;
+
+  cv.innerHTML = `
+    <h2>${prenom} ${nom}</h2>
+    <p><strong>Email :</strong> ${email} | <strong>Tél :</strong> ${tel}</p>
+    <h3>🎯 Objectif</h3><p>${objectif}</p>
+    <h3>💼 Expériences</h3><p>${exp}</p>
+    <h3>🎓 Éducation</h3><p>${edu}</p>
+    <h3>💪 Compétences</h3><ul>${comp.map(c => `<li>${c.trim()}</li>`).join('')}</ul>
+    <h3>🌍 Langues</h3><p>${langues}</p>
+    <h3>🔗 Réseaux</h3><p>${reseaux}</p>
+  `;
+}
+
+function exportPDF() {
+  if (!localStorage.getItem("digibox_paid")) {
+    alert("Veuillez effectuer le paiement avant téléchargement.");
+    window.location.href = "checkout.html";
+    return;
+  }
+  html2pdf().from(document.getElementById("cv-preview")).save("CV-DigiBox.pdf");
+}
+</script>
+<script src="cv-builder.js"></script>
+
+</body>
+</html>

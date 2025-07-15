@@ -2,124 +2,58 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Téléchargement - DigiBox Market</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mes Téléchargements - DigiBox Market</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    .telechargement {
-      max-width: 500px;
-      margin: 80px auto;
-      padding: 30px;
-      background-color: #fff;
-      border-radius: 12px;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #f1f5f9;
+      padding: 40px;
       text-align: center;
-      box-shadow: 0 4px 24px #0001;
     }
-    .telechargement h2 {
+    h1 {
       margin-bottom: 20px;
+      color: #3b82f6;
     }
-    .telechargement a.btn {
-      display: inline-block;
-      margin-top: 20px;
+    .downloads {
+      max-width: 600px;
+      margin: auto;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    .downloads a {
+      display: block;
+      margin: 15px 0;
       background: #3b82f6;
       color: white;
-      padding: 12px 20px;
+      padding: 12px;
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
+      transition: background 0.3s;
     }
-    .telechargement a.btn:hover {
+    .downloads a:hover {
       background: #2563eb;
     }
-    header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 40px;
-      background-color: #f5f5f5;
-      box-shadow: 0 2px 10px #0001;
-    }
-    header img.logo {
-      height: 40px;
-    }
-    nav a {
-      margin-left: 20px;
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-    }
-    nav a:hover {
+    .back {
+      margin-top: 20px;
+      display: inline-block;
+      color: #f1f5f9;
       text-decoration: underline;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: #f7f7f7;
-      margin-top: 60px;
-      font-size: 0.9rem;
-      color: #555;
     }
   </style>
 </head>
 <body>
-  <header>
-    <div>
-      <img src="img/logo.png" alt="DigiBox Market" class="logo">
-    </div>
-    <nav>
-      <a href="index.html">Accueil</a>
-      <a href="produits.html">Produits</a>
-      <a href="paiement.html">Paiement</a>
-    </nav>
-  </header>
-
-  <main>
-    <div class="telechargement">
-      <h2>✅ Merci pour votre achat !</h2>
-      <p>Votre téléchargement est prêt :</p>
-      <a id="download-link" href="#" class="btn" download>Télécharger maintenant</a>
-      <p style="margin-top: 20px;">
-        <a href="index.html">← Retour à l'accueil</a>
-      </p>
-    </div>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
-  </footer>
-
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-
-    if (!token) {
-      alert("Accès non autorisé. Redirection vers l'accueil.");
-      window.location.href = "index.html";
-    } else {
-      try {
-        const decoded = atob(token).split(':');
-        const produit = decoded[0];
-
-        const liens = {
-          "CV Canva Bleu Pro": "telechargements/cv-canva.zip",
-          "Modèle CV Pro": "telechargements/cv-pro.zip",
-          "ebook-marketing": "telechargements/ebook-marketing.zip",
-          "modele-cv": "telechargements/modele-cv.zip",
-          "formation-canva": "telechargements/formation-canva.zip"
-        };
-
-        const lien = liens[produit];
-        if (lien) {
-          document.getElementById("download-link").href = lien;
-        } else {
-          alert("Produit introuvable.");
-          window.location.href = "index.html";
-        }
-      } catch (e) {
-        alert("Jeton invalide.");
-        window.location.href = "index.html";
-      }
-    }
-  </script>
+  <h1>📥 Vos Téléchargements</h1>
+  <div class="downloads">
+    <a href="downloads/cv-pro.zip" download>⬇ Télécharger CV Pro</a>
+    <a href="downloads/ebook-seo.pdf" download>⬇ Télécharger Ebook SEO</a>
+    <a href="downloads/formation-canva.zip" download>⬇ Télécharger Formation Canva</a>
+  </div>
+  <a href="produits.html" class="back">← Retour boutique</a>
 </body>
 </html>

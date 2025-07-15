@@ -3,111 +3,96 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DigiBox Market - Accueil</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link rel="stylesheet" href="style.css">
+  <title>DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
 </head>
 <body>
 
-  <!-- Menu chargé dynamiquement -->
-  <div id="menu-container"></div>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="assets/img/logo.jpg" alt="DigiBox" style="height:35px; vertical-align:middle;">
+      <span>DigiBox Market</span>
+    </div>
 
-  <script>
-    fetch("menu.html")
-      .then(res => res.text())
-      .then(html => document.getElementById("menu-container").innerHTML = html);
-  </script>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul class="menu" id="mainMenu">
+      <li><a href="index.html">Accueil</a></li>
+      <li class="has-submenu">
+        <a href="#">Produits ▼</a>
+        <ul class="submenu">
+          <li><a href="cv-builder.html">CV Pro</a></li>
+          <li><a href="produits.html#ebooks">Ebooks</a></li>
+          <li><a href="produits.html#formations">Formations</a></li>
+        </ul>
+      </li>
+      <li><a href="catalogue.html">Catalogue CV</a></li>
+    </ul>
 
+    <div class="user-links">
+      <a href="profil.html" title="Profil">👤</a>
+      <a href="logout.html" title="Déconnexion">🚪</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
   <section class="hero">
-    <h2>Bienvenue sur DigiBox Market, votre boutique en ligne</h2>
-    <div class="typewriter" id="story"></div>
+    <h1>Bienvenue sur DigiBox Market</h1>
+    <p>Votre boutique pour CV professionnels, ebooks et formations.</p>
   </section>
 
-  <section class="explore-cv" style="text-align:center; padding:40px;">
-    <h2>📚 Découvrez nos 100 modèles de CV</h2>
-    <p>Des CV modernes, prêts à personnaliser et télécharger.</p>
-    <a href="cv/index.html" class="btn-catalogue">Voir le catalogue des CV ➔</a>
-  </section>
-
+  <!-- PRODUITS -->
   <section class="products-container" id="produits">
     <h2>Nos Produits</h2>
     <div class="product-list">
       <div class="product-card">
-        <img src="assets/img/cv-canva-1.png" alt="CV Canva Bleu Pro" />
-        <h3>CV Canva Bleu Pro</h3>
-        <p>Modèle 100% modifiable sur Canva</p>
-        <p class="price">1000 FCFA</p>
-        <a href="paiement.html?produit=CV Canva Bleu Pro&prix=1000">Acheter</a>
-      </div>
-      <div class="product-card">
-        <img src="assets/img/cv-pro.png" alt="Modèle CV Pro" />
-        <h3>Modèle CV Pro</h3>
-        <p>CV moderne, facile à éditer</p>
+        <img src="assets/img/cv-pro.png" alt="CV Pro" />
+        <h3>CV Pro</h3>
+        <p>Modèle premium, prêt à télécharger</p>
         <p class="price">2000 FCFA</p>
-        <a href="paiement.html?produit=Modèle CV Pro&prix=2000">Acheter</a>
+        <button onclick="addToCart('CV Pro', 2000)">Ajouter au panier</button>
       </div>
       <div class="product-card">
         <img src="assets/img/ebook.png" alt="Ebook SEO" />
         <h3>Ebook SEO</h3>
         <p>Apprenez le référencement facilement</p>
         <p class="price">3000 FCFA</p>
-        <a href="paiement.html?produit=Ebook SEO&prix=3000">Acheter</a>
+        <button onclick="addToCart('Ebook SEO', 3000)">Ajouter au panier</button>
       </div>
       <div class="product-card">
         <img src="assets/img/formation.png" alt="Formation Canva" />
         <h3>Formation Canva</h3>
-        <p>Maîtrisez Canva comme un pro</p>
+        <p>Devenez un pro des visuels</p>
         <p class="price">5000 FCFA</p>
-        <a href="paiement.html?produit=Formation Canva&prix=5000">Acheter</a>
+        <button onclick="addToCart('Formation Canva', 5000)">Ajouter au panier</button>
       </div>
     </div>
   </section>
 
+  <!-- BOUTON FLOTTANT PANIER -->
+  <a href="#" class="floating-btn" onclick="openCart()">🛒 Voir panier</a>
+
+  <!-- MODAL PANIER -->
+<div class="modal" id="cartModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeCart()">&times;</span>
+    <h3>🛒 Votre Panier</h3>
+    <div class="cart-items" id="cartItems">
+      <!-- Les articles apparaîtront ici dynamiquement -->
+    </div>
+    <div class="cart-summary">
+      <p><strong>Total Articles :</strong> <span id="totalItems">0</span></p>
+      <p><strong>Total à Payer :</strong> <span id="totalAmount">0 FCFA</span></p>
+    </div>
+    <button class="btn pay-btn" id="checkoutBtn">Payer Maintenant</button>
+  </div>
+</div>
+
   <footer>
     <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
-    <img src="assets/img/logo.jpg" alt="DigiBox Market" />
-    <p><a href="https://wa.me/22879664863" target="_blank">Contact WhatsApp</a></p>
   </footer>
 
-  <!-- Boutons flottants -->
-  <a href="cv/index.html" class="floating-cv-btn">📚 CV</a>
-  <a href="#" class="floating-btn" onclick="openCart()">🛒 Panier</a>
-
-  <!-- Panier modal -->
-  <div class="modal" id="cartModal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeCart()">&times;</span>
-      <h3>🛒 Votre panier</h3>
-      <ul class="cart-list" id="cartItems"></ul>
-      <p><strong>Total :</strong> <span id="cartTotal">0</span> FCFA</p>
-      <button class="pay-btn" onclick="payNow()">Payer maintenant</button>
-    </div>
-  </div>
-
-  <script src="js/script.js"></script>
-  <script>
-    const storyText = `
-Il était une fois un jeune créatif fatigué de chercher des CV, ebooks et formations de qualité.
-Un jour, il se dit : "Pourquoi ne pas créer un endroit simple, rapide et fiable ?"
-
-C’est ainsi que DigiBox Market est né. Un lieu pensé pour toi :
-📂 Des CV prêts à l’emploi
-📘 Des ebooks utiles
-🎓 Des formations pour progresser
-
-Tu es ici chez toi. Explore, télécharge, apprends, progresse.
-Le futur, c’est maintenant. Bienvenue dans la boîte !
-`;
-    let index = 0;
-    const speed = 30;
-    function typeWriter() {
-      if (index < storyText.length) {
-        document.getElementById("story").innerHTML += storyText.charAt(index);
-        index++;
-        setTimeout(typeWriter, speed);
-      }
-    }
-    window.onload = typeWriter;
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

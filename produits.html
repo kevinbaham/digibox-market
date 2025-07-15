@@ -1,84 +1,124 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Produits - DigiBox Market</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      background-image: url('img/background.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      background-position: center;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos Produits - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  
-  <div id="menu-container"></div>
-<script>
-fetch("menu.html")
-  .then(r=>r.text())
-  .then(h=>document.getElementById("menu-container").innerHTML=h);
-</script>
 
-  <header>
-    <nav class="navbar">
-      <img src="img/logo.jpg" alt="DigiBox Logo" class="logo">
-      <h1>DigiBox Market</h1>
-      <a href="index.html">Accueil</a>
-      <a href="produits.html" class="active">Produits</a>
-      <a href="profil.html">Profil</a>
-      <a href="logout.html">Déconnexion</a>
-    </nav>
-  </header>
-
-  <main class="products-container">
-    <h2>Nos Produits Numériques</h2>
-    <div class="product-list">
-      <div class="product-card">
-        <img src="images/ebook1.jpg" alt="Ebook 1">
-        <h3>Ebook Marketing Digital</h3>
-        <p>Un guide pratique pour lancer votre stratégie digitale.</p>
-        <span class="price">5 000 FCFA</span>
-        <a href="paiement.html?produit=ebook-marketing&prix=5000" class="btn">Acheter</a>
-      </div>
-
-      <div class="product-card">
-        <img src="images/modele-cv.jpg" alt="Modèle de CV">
-        <h3>Modèle de CV Professionnel</h3>
-        <p>CV moderne et personnalisable pour décrocher vos entretiens.</p>
-        <span class="price">3 000 FCFA</span>
-        <a href="paiement.html?produit=cv-pro&prix=3000" class="btn">Acheter</a>
-      </div>
-
-      <div class="product-card">
-        <img src="images/formation-canva.jpg" alt="Formation Canva">
-        <h3>Formation Canva Express</h3>
-        <p>Apprenez à créer des visuels pro en 1h.</p>
-        <span class="price">4 000 FCFA</span>
-        <a href="paiement.html?produit=formation-canva&prix=4000" class="btn">Acheter</a>
-      </div>
-
-      <div class="product-card">
-        <img src="images/formation-instagram.jpg" alt="Formation Instagram">
-        <h3>Formation Instagram Pro</h3>
-        <p>Devenez influent en maîtrisé votre stratégie Instagram.</p>
-        <span class="price">4 500 FCFA</span>
-        <a href="paiement.html?produit=formation-instagram&prix=4500" class="btn">Acheter</a>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="assets/img/logo.jpg" alt="DigiBox" />
+      <span>DigiBox Market</span>
     </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul class="menu" id="mainMenu">
+      <li><a href="index.html">Accueil</a></li>
+      <li class="has-submenu">
+        <a href="#">Produits ▼</a>
+        <ul class="submenu">
+          <li><a href="cv-builder.html">CV Pro</a></li>
+          <li><a href="produits.html#ebooks">Ebooks</a></li>
+          <li><a href="produits.html#formations">Formations</a></li>
+        </ul>
+      </li>
+      <li><a href="cv-builder.html">Catalogue CV</a></li>
+    </ul>
+    <div class="user-links">
+      <a href="profil.html" title="Profil">
+        <svg width="24" height="24" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </a>
+      <a href="logout.html" title="Déconnexion">
+        <svg width="24" height="24" fill="currentColor"><path d="M16 17l5-5-5-5M21 12H9m-5 9V3"/></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- PRODUITS -->
+  <main>
+    <section id="ebooks" style="padding:40px;">
+      <h2>📘 Ebooks</h2>
+      <div class="product-list">
+        <div class="product-card">
+          <img src="assets/img/ebook.png" alt="Ebook SEO" />
+          <h3>Ebook SEO</h3>
+          <p>Boostez votre référencement</p>
+          <p class="price">3000 FCFA</p>
+          <button onclick="addToCart('Ebook SEO', 3000)">Ajouter au panier</button>
+        </div>
+        <div class="product-card">
+          <img src="assets/img/ebook2.png" alt="Ebook Marketing" />
+          <h3>Ebook Marketing</h3>
+          <p>Stratégies pour entrepreneurs</p>
+          <p class="price">2500 FCFA</p>
+          <button onclick="addToCart('Ebook Marketing', 2500)">Ajouter au panier</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="formations" style="padding:40px;">
+      <h2>🎓 Formations</h2>
+      <div class="product-list">
+        <div class="product-card">
+          <img src="assets/img/formation.png" alt="Formation Canva" />
+          <h3>Formation Canva</h3>
+          <p>Maîtrisez le design</p>
+          <p class="price">5000 FCFA</p>
+          <button onclick="addToCart('Formation Canva', 5000)">Ajouter au panier</button>
+        </div>
+        <div class="product-card">
+          <img src="assets/img/formation2.png" alt="Formation SEO" />
+          <h3>Formation SEO</h3>
+          <p>Améliorez votre visibilité Google</p>
+          <p class="price">4500 FCFA</p>
+          <button onclick="addToCart('Formation SEO', 4500)">Ajouter au panier</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv" style="padding:40px;">
+      <h2>📝 CV Pro</h2>
+      <div class="product-list">
+        <div class="product-card">
+          <img src="assets/img/cv-canva-1.png" alt="CV Canva Pro" />
+          <h3>CV Canva Pro</h3>
+          <p>100% modifiable</p>
+          <p class="price">1000 FCFA</p>
+          <button onclick="addToCart('CV Canva Pro', 1000)">Ajouter au panier</button>
+        </div>
+        <div class="product-card">
+          <img src="assets/img/cv-pro.png" alt="Modèle CV Pro" />
+          <h3>Modèle CV Pro</h3>
+          <p>CV moderne et pro</p>
+          <p class="price">2000 FCFA</p>
+          <button onclick="addToCart('Modèle CV Pro', 2000)">Ajouter au panier</button>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <section class="cta-download">
-    <h2>Accédez à vos fichiers</h2>
-    <p>Après paiement, cliquez ci-dessous pour accéder à la page de téléchargement.</p>
-    <a href="telechargement.html" class="btn">Aller aux téléchargements</a>
-  </section>
-
+  <!-- FOOTER -->
   <footer>
     <p>&copy; 2025 DigiBox Market. Tous droits réservés.</p>
+    <img src="assets/img/logo.jpg" alt="DigiBox" />
+    <p><a href="https://wa.me/22879664863" target="_blank">Contact WhatsApp</a></p>
   </footer>
+
+  <!-- PANIER -->
+  <a href="#" class="floating-btn" onclick="openCart()">🛒</a>
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeCart()">&times;</span>
+      <h3>🛒 Votre panier</h3>
+      <ul class="cart-list" id="cartItems"></ul>
+      <p><strong>Total :</strong> <span id="total-amount">0 FCFA</span></p>
+      <button class="pay-btn" onclick="payNow()">Payer maintenant</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

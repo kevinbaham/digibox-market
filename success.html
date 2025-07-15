@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mon Profil - DigiBox Market</title>
+  <title>Paiement Réussi - DigiBox Market</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -14,23 +14,21 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
-      text-align: center;
       flex-direction: column;
+      text-align: center;
     }
-    .profile-card {
+    .success-card {
       background: #1e293b;
       padding: 30px;
       border-radius: 12px;
       box-shadow: 0 0 20px rgba(0,0,0,0.5);
       max-width: 400px;
     }
-    .profile-card h2 {
+    .success-card h2 {
       margin-bottom: 15px;
+      color: #22c55e;
     }
-    .profile-card p {
-      margin: 10px 0;
-    }
-    .profile-card a {
+    .success-card a {
       display: inline-block;
       margin-top: 20px;
       background: #3b82f6;
@@ -40,26 +38,18 @@
       text-decoration: none;
       font-weight: bold;
     }
-    .profile-card a:hover {
+    .success-card a:hover {
       background: #2563eb;
     }
   </style>
 </head>
 <body>
-  <div class="profile-card">
-    <h2>👤 Mon Profil</h2>
-    <p id="userEmail">Chargement...</p>
-    <a href="produits.html">← Retour aux produits</a>
+  <div class="success-card">
+    <h2>✅ Paiement Réussi</h2>
+    <p>Merci pour votre achat sur DigiBox Market.</p>
+    <p>Vous pouvez maintenant télécharger vos produits ou revenir à la boutique.</p>
+    <a href="telechargement.html">📥 Télécharger</a><br>
+    <a href="produits.html" style="margin-top:10px; display:inline-block;">← Retour boutique</a>
   </div>
-
-  <script>
-    const userEmail = localStorage.getItem('digibox_user') || localStorage.getItem('digibox_google_login');
-    const userEl = document.getElementById('userEmail');
-    if(userEmail){
-      userEl.textContent = `Connecté en tant que : ${userEmail}`;
-    } else {
-      userEl.textContent = "Non connecté. Veuillez vous identifier.";
-    }
-  </script>
 </body>
 </html>

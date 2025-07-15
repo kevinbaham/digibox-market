@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paiement - DigiBox Market</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.cinetpay.com/seamless/main.js"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; background: #f1f5f9; padding: 30px; color: #333; }
+    .checkout-container {
+      max-width: 500px; margin: auto; background: white; border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1); padding: 30px; text-align: center;
+    }
+    h1 { margin-bottom: 20px; }
+    .cart-summary { text-align: left; margin-bottom: 20px; }
+    .cart-summary ul { list-style: none; padding: 0; }
+    .cart-summary li { margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom:8px; }
+    .pay-btn {
+      background: #16a34a; color: white; padding: 12px 24px;
+      border: none; border-radius: 8px; font-size: 1rem; cursor: pointer;
+      font-weight: bold; transition: 0.3s;
+    }
+    .pay-btn:hover { background: #15803d; }
+  </style>
+</head>
+<body>
+
+<div class="checkout-container">
+  <h1>💳 Paiement sécurisé</h1>
+
+  <div class="cart-summary">
+    <h3>Votre commande</h3>
+    <ul id="checkoutItems"></ul>
+    <p><strong>Total à payer :</strong> <span id="checkoutTotal">0 FCFA</span></p>
+  </div>
+
+  <button class="pay-btn" onclick="payNow()">Payer maintenant</button>
+</div>
+
+<script>
+  const checkoutItems = document.getElementById('checkoutItems');
+  const checkoutTotal = document.getElementById('checkoutTotal');
+  let panier = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function renderCheckout(){
+    let total = 0;
+    checkoutItems.innerHTML = '';
+    panier.forEach(item => {
+      total += Number(item.prix);
+      const li = document.createElement('li');
+      li.textContent = `${item.product} - ${item.prix} FCFA`;
+      checkoutItems.appendChild(li);
+    });
+    checkoutTotal.textContent = `${total} FCFA`;
+    return total;
+  }
+
+  function payNow(){
+    const total = renderCheckout();
+    if (panier.length === 0) {
+      alert("Votre panier est vide !");
+      return;
+    }
+
+    CinetPay.setConfig({
+      apikey: '19028667686ed56d2e3fc6.96881271',
+      site_id: '105901553',
+      notify_url: 'https://digibox-market.netlify.app/#',
+      return_url: 'https://digibox-market.netlify.app/telechargement.html',
+      mode: 'PRODUCTION'
+    });
+
+    CinetPay.getCheckout({
+      transaction_id: Math.floor(Math.random() * 100000000).toString(),
+      amount: total,
+      currency: 'XOF',
+      channels: 'ALL',
+      description: 'Paiement DigiBox Market'
+    });
+
+    CinetPay.waitResponse(function(data) {
+      if (data.status === "ACCEPTED") {
+        localStorage.setItem("digibox_paid", true);
+        localStorage.removeItem("cart");
+        alert("✅ Paiement validé !");
+        window.location.href = "telechargement.html";
+      } else {
+        alert("⛔ Paiement refusé ou annulé.");
+      }
+    });
+
+    CinetPay.onError(function(data){
+      console.error("Erreur CinetPay:", data);
+      alert("Une erreur est survenue. Veuillez réessayer.");
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', renderCheckout);
+</script>
+
+</body>
+</html>
+function checkoutPanier() {
+  let panier = JSON.parse(localStorage.getItem('cart')) || [];
+  let total = panier.reduce((sum, item) => sum + parseInt(item.prix), 0);
+
+  if (total <= 0) {
+    alert("Votre panier est vide !");
+    return;
+  }
+
+  CinetPay.setConfig({
+    apikey: '19028667686ed56d2e3fc6.96881271',
+    site_id: '105901553',
+    notify_url: 'https://digibox-market.netlify.app/#',
+    return_url: 'https://digibox-market.netlify.app/success.html',
+    mode: 'PRODUCTION'
+  });
+
+  CinetPay.getCheckout({
+    transaction_id: Math.floor(Math.random() * 1000000000).toString(),
+    amount: total,
+    currency: 'XOF',
+    channels: 'ALL',
+    description: 'Paiement DigiBox - Panier',
+    customer_name: "Client",
+    customer_surname: "DigiBox",
+    customer_email: "client@example.com",
+    customer_phone_number: "+22899999999",
+    customer_address: "Lomé",
+    customer_city: "Lomé",
+    customer_country: "TG"
+  });
+
+  CinetPay.waitResponse(function(data) {
+    if (data.status === "ACCEPTED") {
+      localStorage.setItem("digibox_paid", true);
+      localStorage.removeItem("cart");
+      window.location.href = "telechargement.html";
+    } else {
+      alert("Votre paiement n'a pas été validé");
+    }
+  });
+
+  CinetPay.onError(function(data) {
+    console.error("Erreur paiement:", data);
+  });
+}
